@@ -1,11 +1,10 @@
 /* ================================================================
-   login.js — User login / signup logic (localStorage simulation)
+   login.js — User login / signup logic (Supabase-backed)
    ================================================================ */
 (function () {
   'use strict';
 
   const $ = id => document.getElementById(id);
-  const LS_USERS = 'pe_users';
   const LS_SESSION = 'pe_session';
 
   // If already logged in, redirect
@@ -33,29 +32,24 @@
     }
   }
 
-  // ===== METHOD TOGGLE (Email / Phone) =====
+  // ===== METHOD TOGGLE =====
   function setupMethodToggle(prefix, emailFormId, phoneFormId) {
     const emailBtn = $(`${prefix}MethodEmail`);
     const phoneBtn = $(`${prefix}MethodPhone`);
     emailBtn.addEventListener('click', () => {
-      emailBtn.classList.add('active');
-      phoneBtn.classList.remove('active');
-      $(emailFormId).classList.add('active');
-      $(phoneFormId).classList.remove('active');
+      emailBtn.classList.add('active'); phoneBtn.classList.remove('active');
+      $(emailFormId).classList.add('active'); $(phoneFormId).classList.remove('active');
     });
     phoneBtn.addEventListener('click', () => {
-      phoneBtn.classList.add('active');
-      emailBtn.classList.remove('active');
-      $(phoneFormId).classList.add('active');
-      $(emailFormId).classList.remove('active');
+      phoneBtn.classList.add('active'); emailBtn.classList.remove('active');
+      $(phoneFormId).classList.add('active'); $(emailFormId).classList.remove('active');
     });
   }
   setupMethodToggle('login', 'loginEmailForm', 'loginPhoneForm');
   setupMethodToggle('signup', 'signupEmailForm', 'signupPhoneForm');
 
   // ===== HELPERS =====
-  function getUsers() { return JSON.parse(localStorage.getItem(LS_USERS) || '[]'); }
-  function saveUsers(u) { localStorage.setItem(LS_USERS, JSON.stringify(u)); }
+  function getUsers() { return lsGet('pe_users', []); }
   function showE(id, msg) { $(id).textContent = msg; $(id).classList.add('visible'); }
   function clearE(id) { $(id).textContent = ''; $(id).classList.remove('visible'); }
   function clearErrors() { document.querySelectorAll('.error-message').forEach(e => { e.textContent = ''; e.classList.remove('visible'); }); }
@@ -144,8 +138,10 @@
       if (!otp || otp.length !== 6) { showE('signupPhoneOtpError', 'Enter 6-digit OTP'); return; }
       if (otp !== generatedOtp) { showE('signupPhoneOtpError', 'Invalid OTP'); return; }
       if (users.find(u => u.phone === phone)) { showE('signupPhoneError', 'Number already registered. Login instead.'); return; }
-      users.push({ name, phone, email: '', password: '', method: 'phone', createdAt: new Date().toISOString() });
-      saveUsers(users);
+      const newUser = { name, phone, email: '', password: '', method: 'phone', createdAt: new Date().toISOString() };
+      users.push(newUser);
+      lsSet('pe_users', users);
+      PE.saveUser(newUser);   // persist to Supabase
       createSession({ name, phone });
     } else {
       const name = $('signupName').value.trim();
@@ -157,8 +153,10 @@
       if (!pass || pass.length < 6) { showE('signupPasswordError', 'Min 6 characters'); return; }
       if (pass !== confirm) { showE('signupConfirmError', 'Passwords do not match'); return; }
       if (users.find(u => u.email === email)) { showE('signupEmailError', 'Email already registered. Login instead.'); return; }
-      users.push({ name, email, password: pass, phone: '', method: 'email', createdAt: new Date().toISOString() });
-      saveUsers(users);
+      const newUser = { name, email, password: pass, phone: '', method: 'email', createdAt: new Date().toISOString() };
+      users.push(newUser);
+      lsSet('pe_users', users);
+      PE.saveUser(newUser);   // persist to Supabase
       createSession({ name, email });
     }
 
@@ -170,7 +168,11 @@
   $('btnGoogleLogin').addEventListener('click', () => {
     const users = getUsers();
     const gUser = { name: 'Google User', email: 'user@gmail.com', password: '', phone: '', method: 'google', createdAt: new Date().toISOString() };
-    if (!users.find(u => u.email === gUser.email)) { users.push(gUser); saveUsers(users); }
+    if (!users.find(u => u.email === gUser.email)) {
+      users.push(gUser);
+      lsSet('pe_users', users);
+      PE.saveUser(gUser);
+    }
     createSession(gUser);
     showToast('Signed in with Google! Redirecting...', 'success');
     setTimeout(() => window.location.href = 'index.html', 1000);

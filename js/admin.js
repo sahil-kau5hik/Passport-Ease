@@ -156,6 +156,7 @@
       app.status = 'Admin Approved';
       app.adminApprovedAt = new Date().toISOString();
       lsSet(LS_KEYS.APPLICATIONS, apps);
+      PE.saveApplication(app);
       renderTable();
       updateStats();
       showToast(`${appId} → Admin Approved! ✅ Ready for passport issuance.`, 'success');
@@ -167,6 +168,7 @@
       app.passportIssuedAt = new Date().toISOString();
       app.passportNumber = generatePassportNumber();
       lsSet(LS_KEYS.APPLICATIONS, apps);
+      PE.saveApplication(app);
       renderTable();
       updateStats();
       showToast(`${appId} → Passport Issued! 🛂 #${app.passportNumber}`, 'success');
@@ -181,6 +183,7 @@
     }
 
     lsSet(LS_KEYS.APPLICATIONS, apps);
+    PE.saveApplication(app);
     renderTable();
     updateStats();
     showToast(`${appId} → "${app.status}"`, 'success');
@@ -303,7 +306,8 @@
         if (!a.docStatus) a.docStatus = {};
         a.docStatus[key] = { status: 'pass', reason: '' };
         lsSet(LS_KEYS.APPLICATIONS, allApps);
-        showDocVerification(appId); // re-render
+        PE.saveApplication(a);
+        showDocVerification(appId);
         showToast(`${DOC_NAMES[key]} → ✅ Passed`, 'success');
       });
     });
@@ -321,7 +325,8 @@
         if (!a.docStatus) a.docStatus = {};
         a.docStatus[key] = { status: 'fail', reason: reason };
         lsSet(LS_KEYS.APPLICATIONS, allApps);
-        showDocVerification(appId); // re-render
+        PE.saveApplication(a);
+        showDocVerification(appId);
         showToast(`${DOC_NAMES[key]} → ❌ Failed: ${reason}`, 'error');
       });
     });
@@ -334,23 +339,23 @@
         a.status = 'Documents Verified';
         a.docsVerifiedAt = new Date().toISOString();
         lsSet(LS_KEYS.APPLICATIONS, allApps);
+        PE.saveApplication(a);
         els.detailOverlay.classList.add('hidden');
         renderTable(); updateStats();
         showToast(`${appId} — All documents verified! ✅ Sent to Police for verification.`, 'success');
       }
     });
 
-    // Reject (send back for re-upload)
     document.getElementById('btnRejectDocs')?.addEventListener('click', () => {
       const allApps = lsGet(LS_KEYS.APPLICATIONS, []);
       const a = allApps.find(x => x.id === appId);
       if (a) {
         a.status = 'Documents Failed';
         a.docsFailedAt = new Date().toISOString();
-        // Build failed doc list
         const failedDocs = Object.entries(a.docStatus || {}).filter(([,v]) => v.status === 'fail').map(([k,v]) => `${DOC_NAMES[k]}: ${v.reason}`);
         a.failedDocsMessage = failedDocs.join('; ');
         lsSet(LS_KEYS.APPLICATIONS, allApps);
+        PE.saveApplication(a);
         els.detailOverlay.classList.add('hidden');
         renderTable(); updateStats();
         showToast(`${appId} — Sent back to user for document re-upload.`, 'info');

@@ -504,15 +504,20 @@
       app.renewalReason = draft.renewalReason || '';
     }
 
+    // Update local cache
     const apps = lsGet(LS_KEYS.APPLICATIONS, []);
     apps.push(app);
-    if (!lsSet(LS_KEYS.APPLICATIONS, apps)) return;
+    window.DB_CACHE[LS_KEYS.APPLICATIONS] = apps;
+    // Persist to Supabase pe_applications table
+    PE.saveApplication(app);
 
+    // Record booked slot in KV store
     const slots = lsGet(LS_KEYS.BOOKED_SLOTS, {});
     if (!slots[app.appointmentDate]) slots[app.appointmentDate] = [];
     slots[app.appointmentDate].push(app.appointmentSlot);
     lsSet(LS_KEYS.BOOKED_SLOTS, slots);
 
+    // Clear draft
     localStorage.removeItem(LS_KEYS.DRAFT);
     localStorage.removeItem(LS_KEYS.DRAFT + '_docs');
     showToast(`Application ${appId} submitted! 🎉`, 'success');

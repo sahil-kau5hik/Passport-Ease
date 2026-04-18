@@ -258,8 +258,8 @@
       a.policeRemarks = remarks || 'Cleared by police verification';
       a.verifiedByCity = assignedCity;
 
-      // NO auto passport issue — goes back to admin for final approval
       lsSet(LS_KEYS.APPLICATIONS, allApps);
+      PE.saveApplication(a);  // persist to Supabase
       $('verifyOverlay').classList.add('hidden');
       renderAll();
       showToast(`${appId} — Police Verified! ✅ Sent to Admin for final approval.`, 'success');
@@ -278,6 +278,7 @@
       a.verifiedByCity = assignedCity;
 
       lsSet(LS_KEYS.APPLICATIONS, allApps);
+      PE.saveApplication(a);  // persist to Supabase
       $('verifyOverlay').classList.add('hidden');
       renderAll();
       showToast(`${appId} rejected by police verification.`, 'error');

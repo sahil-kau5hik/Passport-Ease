@@ -444,9 +444,11 @@
       const type = document.getElementById('hdType').value;
       const name = document.getElementById('hdName').value;
       const msg = document.getElementById('hdMessage').value;
+      const complaint = { type, name, msg, date: new Date().toISOString() };
       let complaints = window.lsGet ? window.lsGet('pe_complaints', []) : [];
-      complaints.push({ type, name, msg, date: new Date().toISOString() });
+      complaints.push(complaint);
       if (window.lsSet) window.lsSet('pe_complaints', complaints);
+      if (window.PE && window.PE.saveComplaint) PE.saveComplaint(complaint); // persist to Supabase
       if(typeof showToast === 'function') {
         showToast('Your ' + type.toLowerCase() + ' has been sent to our Tech Team. Thank you!', 'success');
       } else {

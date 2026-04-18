@@ -1,6 +1,7 @@
 /* ================================================================
    shared.js — Utility functions shared across all pages
    Backend: Supabase (real-time database)
+   Project: ycpivhefrggsjrpdmfxe
    ================================================================ */
 
 const SUPABASE_URL = 'https://ycpivhefrggsjrpdmfxe.supabase.co';
@@ -23,7 +24,7 @@ window.onDBReady = function (cb) {
   else document.addEventListener('DBLoaded', cb);
 };
 
-/* ─── Generic Supabase REST helpers ─────────────────────────── */
+/* ─── Supabase REST helpers ──────────────────────────────────── */
 function sbHeaders(extras = {}) {
   return {
     'apikey': SUPABASE_ANON_KEY,
@@ -33,49 +34,25 @@ function sbHeaders(extras = {}) {
   };
 }
 
-async function sbGet(table, query = '') {
-  const res = await fetch(`${SUPABASE_URL}/rest/v1/${table}${query}`, {
-    headers: sbHeaders()
+async function sbFetch(path, opts = {}) {
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/${path}`, {
+    headers: sbHeaders(opts.headers || {}),
+    method: opts.method || 'GET',
+    body: opts.body ? JSON.stringify(opts.body) : undefined
   });
-  if (!res.ok) throw new Error(`sbGet ${table}: ${res.status}`);
-  return res.json();
+  if (!res.ok) {
+    const err = await res.text().catch(() => res.statusText);
+    throw new Error(`Supabase [${res.status}] ${path}: ${err}`);
+  }
+  const text = await res.text();
+  return text ? JSON.parse(text) : null;
 }
 
-async function sbUpsert(table, body) {
-  const res = await fetch(`${SUPABASE_URL}/rest/v1/${table}`, {
-    method: 'POST',
-    headers: sbHeaders({ 'Prefer': 'resolution=merge-duplicates' }),
-    body: JSON.stringify(body)
-  });
-  if (!res.ok) throw new Error(`sbUpsert ${table}: ${res.status}`);
-  return res.status;
-}
-
-async function sbPatch(table, matchParam, body) {
-  const res = await fetch(`${SUPABASE_URL}/rest/v1/${table}?${matchParam}`, {
-    method: 'PATCH',
-    headers: sbHeaders({ 'Prefer': 'return=representation' }),
-    body: JSON.stringify(body)
-  });
-  if (!res.ok) throw new Error(`sbPatch ${table}: ${res.status}`);
-  return res.json();
-}
-
-/* ─── KV store helpers (pe_store table) ─────────────────────── */
-async function loadAllFromSupabase() {
-  try {
-    const rows = await sbGet('pe_store', '?select=key,data');
-    if (Array.isArray(rows)) {
-      rows.forEach(r => { window.DB_CACHE[r.key] = r.data; });
-    }
-  } catch (e) {
-    console.warn('Supabase load failed, using localStorage fallback:', e);
-    for (let i = 0; i < localStorage.length; i++) {
-      const k = localStorage.key(i);
-      if (k && k.startsWith('pe_')) {
-        try { window.DB_CACHE[k] = JSON.parse(localStorage.getItem(k)); } catch (_) {}
-      }
-    }
+/* ─── KV Store (pe_store) ────────────────────────────────────── */
+async function loadKVStore() {
+  const rows = await sbFetch('pe_store?select=key,data');
+  if (Array.isArray(rows)) {
+    rows.forEach(r => { window.DB_CACHE[r.key] = r.data; });
   }
 }
 
@@ -85,22 +62,57 @@ function lsGet(key, fallback) {
 
 function lsSet(key, value) {
   window.DB_CACHE[key] = value;
-  // fire-and-forget async write
-  sbUpsert('pe_store', { key, data: value }).catch(e => {
-    console.warn('Supabase write failed, falling back to localStorage:', e);
+  sbFetch('pe_store', {
+    method: 'POST',
+    headers: { 'Prefer': 'resolution=merge-duplicates' },
+    body: { key, data: value }
+  }).catch(e => {
+    console.warn('KV write failed, localStorage fallback:', e.message);
     try { localStorage.setItem(key, JSON.stringify(value)); } catch (_) {}
   });
   return true;
 }
 
-/* ─── Applications CRUD (pe_applications table) ─────────────── */
-window.PE = window.PE || {};
+/* ─── Applications (pe_applications) ────────────────────────── */
+window.PE = {};
 
+/**
+ * Save/upsert a full application object into pe_applications.
+ * Maps JS camelCase fields → snake_case DB columns.
+ * The `doc_data` JSONB column holds docs + docStatus + all other fields.
+ */
 PE.saveApplication = async function (app) {
+  const row = {
+    id:               app.id,
+    full_name:        app.fullName || '',
+    application_type: app.applicationType || 'Fresh',
+    status:           app.status || 'Submitted',
+    user_id:          app.userId || null,
+    psk_city:         app.pskCity || null,
+    mobile:           app.mobile || null,
+    aadhaar_number:   app.aadhaarNumber || null,
+    appointment_date: app.appointmentDate || null,
+    appointment_slot: app.appointmentSlot || null,
+    submitted_at:     app.submittedAt || new Date().toISOString(),
+    date_formatted:   app.dateFormatted || null,
+    passport_number:  app.passportNumber || null,
+    rejection_reason: app.rejectionReason || null,
+    doc_data:         app   // full object stored as JSONB
+  };
+
   try {
-    await sbUpsert('pe_applications', app);
+    await sbFetch('pe_applications', {
+      method: 'POST',
+      headers: { 'Prefer': 'resolution=merge-duplicates' },
+      body: row
+    });
+    // update local cache
+    const apps = lsGet(LS_KEYS.APPLICATIONS, []);
+    const idx = apps.findIndex(a => a.id === app.id);
+    if (idx >= 0) apps[idx] = app; else apps.push(app);
+    window.DB_CACHE[LS_KEYS.APPLICATIONS] = apps;
   } catch (e) {
-    console.warn('PE.saveApplication fallback to KV store:', e);
+    console.warn('PE.saveApplication DB failed, KV fallback:', e.message);
     const apps = lsGet(LS_KEYS.APPLICATIONS, []);
     const idx = apps.findIndex(a => a.id === app.id);
     if (idx >= 0) apps[idx] = app; else apps.push(app);
@@ -108,42 +120,75 @@ PE.saveApplication = async function (app) {
   }
 };
 
+/**
+ * Load all applications. Returns the full JS objects from doc_data.
+ */
 PE.loadApplications = async function () {
   try {
-    const rows = await sbGet('pe_applications', '?select=*&order=submitted_at.desc');
+    const rows = await sbFetch('pe_applications?select=doc_data&order=submitted_at.desc');
     if (Array.isArray(rows) && rows.length > 0) {
-      window.DB_CACHE[LS_KEYS.APPLICATIONS] = rows;
-      return rows;
+      const apps = rows.map(r => r.doc_data).filter(Boolean);
+      window.DB_CACHE[LS_KEYS.APPLICATIONS] = apps;
+      return apps;
     }
   } catch (e) {
-    console.warn('PE.loadApplications fallback:', e);
+    console.warn('PE.loadApplications DB failed, cache fallback:', e.message);
   }
   return lsGet(LS_KEYS.APPLICATIONS, []);
 };
 
+/**
+ * Patch specific fields on an existing application.
+ */
 PE.patchApplication = async function (appId, fields) {
+  // Always update in local cache first (optimistic)
+  const apps = lsGet(LS_KEYS.APPLICATIONS, []);
+  const app = apps.find(a => a.id === appId);
+  if (app) Object.assign(app, fields);
+  window.DB_CACHE[LS_KEYS.APPLICATIONS] = apps;
+
   try {
-    await sbPatch('pe_applications', `id=eq.${encodeURIComponent(appId)}`, fields);
-    // update local cache
-    const apps = lsGet(LS_KEYS.APPLICATIONS, []);
-    const app = apps.find(a => a.id === appId);
-    if (app) Object.assign(app, fields);
-    window.DB_CACHE[LS_KEYS.APPLICATIONS] = apps;
+    // Build flat column updates
+    const colUpdate = {};
+    if (fields.status)          colUpdate.status          = fields.status;
+    if (fields.passportNumber)  colUpdate.passport_number = fields.passportNumber;
+    if (fields.rejectionReason) colUpdate.rejection_reason = fields.rejectionReason;
+    colUpdate.doc_data = app; // always sync the full object
+
+    await sbFetch(`pe_applications?id=eq.${encodeURIComponent(appId)}`, {
+      method: 'PATCH',
+      headers: { 'Prefer': 'return=minimal' },
+      body: colUpdate
+    });
   } catch (e) {
-    console.warn('PE.patchApplication fallback:', e);
-    const apps = lsGet(LS_KEYS.APPLICATIONS, []);
-    const app = apps.find(a => a.id === appId);
-    if (app) Object.assign(app, fields);
+    console.warn('PE.patchApplication DB failed, KV fallback:', e.message);
     lsSet(LS_KEYS.APPLICATIONS, apps);
   }
 };
 
-/* ─── Users (pe_users table) ─────────────────────────────────── */
+/* ─── Users (pe_users) ───────────────────────────────────────── */
 PE.saveUser = async function (user) {
+  const row = {
+    name:       user.name  || null,
+    email:      user.email || null,
+    phone:      user.phone || null,
+    password:   user.password || null,   // plain-text for demo – use Supabase Auth in production
+    method:     user.method || 'email',
+    created_at: user.createdAt || new Date().toISOString()
+  };
   try {
-    await sbUpsert('pe_users', user);
+    await sbFetch('pe_users', {
+      method: 'POST',
+      headers: { 'Prefer': 'resolution=merge-duplicates' },
+      body: row
+    });
+    // update local cache
+    const users = lsGet('pe_users', []);
+    const idx = users.findIndex(u => u.email === user.email && user.email || u.phone === user.phone && user.phone);
+    if (idx >= 0) users[idx] = user; else users.push(user);
+    window.DB_CACHE['pe_users'] = users;
   } catch (e) {
-    console.warn('PE.saveUser fallback:', e);
+    console.warn('PE.saveUser DB failed, KV fallback:', e.message);
     const users = lsGet('pe_users', []);
     const idx = users.findIndex(u => u.email === user.email || u.phone === user.phone);
     if (idx >= 0) users[idx] = user; else users.push(user);
@@ -153,20 +198,53 @@ PE.saveUser = async function (user) {
 
 PE.loadUsers = async function () {
   try {
-    const rows = await sbGet('pe_users', '?select=*');
+    const rows = await sbFetch('pe_users?select=*&order=created_at.desc');
     if (Array.isArray(rows)) {
       window.DB_CACHE['pe_users'] = rows;
       return rows;
     }
   } catch (e) {
-    console.warn('PE.loadUsers fallback:', e);
+    console.warn('PE.loadUsers DB failed, cache fallback:', e.message);
   }
   return lsGet('pe_users', []);
 };
 
+/* ─── Complaints (pe_complaints) ─────────────────────────────── */
+PE.saveComplaint = async function (complaint) {
+  const row = {
+    type:       complaint.type,
+    name:       complaint.name,
+    msg:        complaint.msg,
+    created_at: complaint.date || new Date().toISOString()
+  };
+  try {
+    await sbFetch('pe_complaints', { method: 'POST', body: row });
+  } catch (e) {
+    console.warn('PE.saveComplaint DB failed, KV fallback:', e.message);
+    const items = lsGet('pe_complaints', []);
+    items.push(complaint);
+    lsSet('pe_complaints', items);
+  }
+};
+
 /* ─── Boot ───────────────────────────────────────────────────── */
 async function initBackendCache() {
-  await loadAllFromSupabase();
+  try {
+    await loadKVStore();
+    // Pre-load applications into cache for faster first render
+    await PE.loadApplications();
+    await PE.loadUsers();
+  } catch (e) {
+    console.warn('Boot: Supabase unavailable, using localStorage fallback.', e.message);
+    // Populate cache from localStorage
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i);
+      if (k && k.startsWith('pe_')) {
+        try { window.DB_CACHE[k] = JSON.parse(localStorage.getItem(k)); } catch (_) {}
+      }
+    }
+  }
+
   window.DB_READY = true;
   document.dispatchEvent(new Event('DBLoaded'));
 
@@ -213,13 +291,13 @@ function showToast(message, type = 'info') {
 /* ─── Helpers ────────────────────────────────────────────────── */
 function getStatusClass(status) {
   const map = {
-    'Submitted':         'submitted',
-    'Documents Verified':'docs-verified',
-    'Documents Failed':  'rejected',
-    'Police Verified':   'police-verified',
-    'Admin Approved':    'approved',
-    'Passport Issued':   'passport-issued',
-    'Rejected':          'rejected',
+    'Submitted':          'submitted',
+    'Documents Verified': 'docs-verified',
+    'Documents Failed':   'rejected',
+    'Police Verified':    'police-verified',
+    'Admin Approved':     'approved',
+    'Passport Issued':    'passport-issued',
+    'Rejected':           'rejected',
   };
   return map[status] || 'submitted';
 }

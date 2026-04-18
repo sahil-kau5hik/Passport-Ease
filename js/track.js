@@ -228,8 +228,9 @@
             delete app.failedDocsMessage;
           }
           lsSet(LS_KEYS.APPLICATIONS, apps);
+          PE.saveApplication(app);  // persist re-upload to Supabase
           showToast(`${docKey} re-uploaded! ${stillFailed.length === 0 ? 'Sent back to admin for verification.' : `${stillFailed.length} document(s) still need re-upload.`}`, 'success');
-          renderApps(); // re-render
+          renderApps();
         };
         reader.readAsDataURL(file);
       });
