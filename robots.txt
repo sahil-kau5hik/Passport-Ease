@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Disallow admin & police portals from search indexing
+Disallow: /admin.html
+Disallow: /admin-login.html
+Disallow: /police.html
+Disallow: /police-login.html
+
+Sitemap: https://passport-ease.vercel.app/sitemap.xml

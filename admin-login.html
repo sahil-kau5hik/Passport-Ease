@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Admin Login — PassportEase Administration Portal" />
+  <title>Admin Login — PassportEase</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">🛂</div>
+        <div class="logo-text">Passport<span>Ease</span></div>
+      </a>
+      <div class="header-actions">
+        <button class="btn-icon" id="themeToggle" title="Toggle Dark Mode">🌙</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <main class="auth-page">
+    <div class="auth-card" style="max-width:420px">
+      <div class="auth-admin-badge">🔒 ADMIN PORTAL</div>
+      <div class="auth-form active" style="display:block">
+        <h2 class="auth-title">Admin Login</h2>
+        <p class="auth-subtitle">Enter admin credentials to access the management panel</p>
+
+        <div class="form-group">
+          <label class="form-label" for="adminUser">Admin Username</label>
+          <input type="text" class="form-input" id="adminUser" placeholder="admin" />
+          <div class="error-message" id="adminUserError"></div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="adminPass">Password</label>
+          <input type="password" class="form-input" id="adminPass" placeholder="Enter admin password" />
+          <div class="error-message" id="adminPassError"></div>
+        </div>
+
+        <button class="btn btn-primary auth-submit" id="btnAdminLogin" style="width:100%;margin-top:12px">🔐 Login as Admin</button>
+
+        <div class="auth-admin-hint">
+          <p><strong>Demo Credentials:</strong></p>
+          <p>Username: <code>admin</code> &nbsp;|&nbsp; Password: <code>admin123</code></p>
+        </div>
+
+        <p class="auth-footer-text" style="margin-top:20px">
+          <a href="login.html">← Back to User Login</a>
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/shared.js"></script>
+  <script>
+    (function () {
+      const $ = id => document.getElementById(id);
+      const LS_SESSION = 'pe_session';
+
+      // If already admin, redirect
+      const session = JSON.parse(localStorage.getItem(LS_SESSION) || 'null');
+      if (session && session.role === 'admin') {
+        window.location.href = 'admin.html';
+        return;
+      }
+
+      $('btnAdminLogin').addEventListener('click', () => {
+        const user = $('adminUser').value.trim();
+        const pass = $('adminPass').value;
+
+        document.querySelectorAll('.error-message').forEach(e => { e.textContent = ''; e.classList.remove('visible'); });
+
+        if (!user) { $('adminUserError').textContent = 'Username required'; $('adminUserError').classList.add('visible'); return; }
+        if (!pass) { $('adminPassError').textContent = 'Password required'; $('adminPassError').classList.add('visible'); return; }
+
+        // Hard-coded admin credentials
+        if (user === 'admin' && pass === 'admin123') {
+          localStorage.setItem(LS_SESSION, JSON.stringify({
+            role: 'admin',
+            name: 'Administrator',
+            loginAt: new Date().toISOString()
+          }));
+          showToast('Admin login successful! Redirecting...', 'success');
+          setTimeout(() => window.location.href = 'admin.html', 1000);
+        } else {
+          $('adminPassError').textContent = 'Invalid username or password';
+          $('adminPassError').classList.add('visible');
+        }
+      });
+
+      // Enter key
+      $('adminPass').addEventListener('keydown', e => { if (e.key === 'Enter') $('btnAdminLogin').click(); });
+    })();
+  </script>
+</body>
+</html>

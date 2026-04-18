@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Apply for a new passport — fill in your personal details, upload required documents, and book an appointment slot." />
+  <title>Apply — PassportEase</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ACCESSIBILITY TOP BAR -->
+  <div class="accessibility-bar" id="accessibilityBar">
+    <div class="accessibility-bar-inner">
+      <div class="accessibility-left">
+        <span class="accessibility-date" id="accessDate"></span>
+      </div>
+      <div class="accessibility-right">
+        <a href="#mainContent" class="accessibility-link">Skip to Main Content</a>
+        <span class="accessibility-divider"></span>
+        <a href="#" class="accessibility-link">Screen Reader Access</a>
+        <span class="accessibility-divider"></span>
+        <div class="font-size-controls">
+          <button class="font-size-btn fs-small" data-fontsize="small" title="Decrease Font Size">A-</button>
+          <button class="font-size-btn fs-normal active" data-fontsize="normal" title="Normal Font Size">A</button>
+          <button class="font-size-btn fs-large" data-fontsize="large" title="Increase Font Size">A+</button>
+        </div>
+        <span class="accessibility-divider"></span>
+        <div class="accessibility-call">
+          <span>📞</span> National Call Center <strong style="margin-left:4px;color:#fbbf24">1800-258-1800</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">🛂</div>
+        <div class="logo-text">Passport<span>Ease</span></div>
+      </a>
+      <nav class="nav-links">
+      </nav>
+      <div class="header-actions">
+        <div class="user-bar" id="userBar"></div>
+        <button class="btn-icon" id="themeToggle" title="Toggle Dark Mode">🌙</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="toast-container" id="toastContainer"></div>
+  <div class="draft-indicator" id="draftIndicator"><span class="check-icon">✅</span> Draft saved</div>
+
+  <main class="main-container fade-in">
+    <div class="page-header">
+      <h1 class="page-title">📝 Passport Application Form</h1>
+      <p class="page-subtitle">Complete all steps to submit your application. Your progress is auto-saved.</p>
+    </div>
+
+    <!-- STEP COUNTER -->
+    <div class="wizard-step-counter" id="stepCounter">Step <strong>1</strong> of <strong>7</strong></div>
+
+    <!-- STEP WIZARD -->
+    <div class="step-wizard" id="stepWizard">
+      <div class="wizard-step active" data-step="1">
+        <div class="wizard-step-circle">1</div>
+        <div class="wizard-step-label">Application Type</div>
+      </div>
+      <div class="wizard-step" data-step="2">
+        <div class="wizard-step-circle">2</div>
+        <div class="wizard-step-label">Personal Details</div>
+      </div>
+      <div class="wizard-step" data-step="3">
+        <div class="wizard-step-circle">3</div>
+        <div class="wizard-step-label">Family Info</div>
+      </div>
+      <div class="wizard-step" data-step="4">
+        <div class="wizard-step-circle">4</div>
+        <div class="wizard-step-label">Contact & Address</div>
+      </div>
+      <div class="wizard-step" data-step="5">
+        <div class="wizard-step-circle">5</div>
+        <div class="wizard-step-label">Documents</div>
+      </div>
+      <div class="wizard-step" data-step="6">
+        <div class="wizard-step-circle">6</div>
+        <div class="wizard-step-label">Appointment</div>
+      </div>
+      <div class="wizard-step" data-step="7">
+        <div class="wizard-step-circle">7</div>
+        <div class="wizard-step-label">Review & Submit</div>
+      </div>
+    </div>
+
+    <form id="passportForm" novalidate autocomplete="off">
+
+      <!-- ========== STEP 1: APPLICATION TYPE ========== -->
+      <div class="step-content active" id="step1">
+        <div class="section-card">
+          <div class="section-title"><span class="icon">📋</span> Application Type</div>
+          <div class="section-subtitle">Select the type of passport service you require</div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label" for="applicationType">Application Type <span class="required">*</span></label>
+              <select class="form-select" id="applicationType" name="applicationType">
+                <option value="">-- Select --</option>
+                <option value="Fresh">Fresh / New Passport</option>
+                <option value="Renewal">Renewal of Passport</option>
+                <option value="Re-issue">Re-issue (Damaged / Lost)</option>
+              </select>
+              <div class="error-message" id="applicationTypeError"></div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="passportType">Passport Type <span class="required">*</span></label>
+              <select class="form-select" id="passportType" name="passportType">
+                <option value="">-- Select --</option>
+                <option value="Ordinary">Ordinary Passport</option>
+                <option value="Diplomatic">Diplomatic Passport</option>
+                <option value="Official">Official Passport</option>
+              </select>
+              <div class="error-message" id="passportTypeError"></div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="bookletType">Booklet Type <span class="required">*</span></label>
+              <select class="form-select" id="bookletType" name="bookletType">
+                <option value="">-- Select --</option>
+                <option value="36 Pages">36 Pages (Normal)</option>
+                <option value="60 Pages">60 Pages (Frequent Traveler)</option>
+              </select>
+              <div class="error-message" id="bookletTypeError"></div>
+            </div>
+          </div>
+
+          <!-- Renewal / Re-issue Fields (conditionally shown) -->
+          <div class="renewal-fields hidden" id="renewalFields">
+            <h3 style="font-size:15px;font-weight:700;margin:28px 0 16px">🔄 Existing Passport Details</h3>
+            <div class="renewal-info-banner">
+              <span style="font-size:18px">ℹ️</span>
+              <span>Please provide your existing passport details for renewal / re-issue processing.</span>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label" for="oldPassportNumber">Old Passport Number <span class="required">*</span></label>
+                <input type="text" class="form-input" id="oldPassportNumber" name="oldPassportNumber" placeholder="e.g. J1234567" maxlength="8" style="text-transform:uppercase" />
+                <div class="error-message" id="oldPassportNumberError"></div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="oldPassportIssueDate">Date of Issue <span class="required">*</span></label>
+                <input type="date" class="form-input" id="oldPassportIssueDate" name="oldPassportIssueDate" />
+                <div class="error-message" id="oldPassportIssueDateError"></div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="oldPassportExpiryDate">Date of Expiry <span class="required">*</span></label>
+                <input type="date" class="form-input" id="oldPassportExpiryDate" name="oldPassportExpiryDate" />
+                <div class="error-message" id="oldPassportExpiryDateError"></div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="oldPassportPlaceOfIssue">Place of Issue <span class="required">*</span></label>
+                <input type="text" class="form-input" id="oldPassportPlaceOfIssue" name="oldPassportPlaceOfIssue" placeholder="e.g. Delhi" />
+                <div class="error-message" id="oldPassportPlaceOfIssueError"></div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="renewalReason">Reason for Renewal / Re-issue <span class="required">*</span></label>
+                <select class="form-select" id="renewalReason" name="renewalReason">
+                  <option value="">-- Select Reason --</option>
+                  <option value="Validity Expired">Validity Expired</option>
+                  <option value="Validity Expiring Soon">Validity Expiring Soon (within 1 year)</option>
+                  <option value="Pages Exhausted">Pages Exhausted</option>
+                  <option value="Name Change">Change in Name</option>
+                  <option value="Address Change">Change in Address</option>
+                  <option value="Appearance Change">Change in Appearance</option>
+                  <option value="Damaged Passport">Damaged Passport</option>
+                  <option value="Lost Passport">Lost Passport</option>
+                  <option value="Stolen Passport">Stolen Passport</option>
+                </select>
+                <div class="error-message" id="renewalReasonError"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="step-nav"><div></div><button type="button" class="btn btn-primary step-next" data-to="2">Next: Personal Details →</button></div>
+        </div>
+      </div>
+
+      <!-- ========== STEP 2: PERSONAL DETAILS ========== -->
+      <div class="step-content" id="step2">
+        <div class="section-card">
+          <div class="section-title"><span class="icon">👤</span> Personal Details</div>
+          <div class="section-subtitle">Enter your details exactly as they appear on your official documents</div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label" for="surname">Surname / Family Name <span class="required">*</span></label>
+              <input type="text" class="form-input" id="surname" name="surname" placeholder="e.g. SHARMA" />
+              <div class="error-message" id="surnameError"></div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="givenName">Given Name <span class="required">*</span></label>
+              <input type="text" class="form-input" id="givenName" name="givenName" placeholder="e.g. RAHUL" />
+              <div class="error-message" id="givenNameError"></div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="dob">Date of Birth <span class="required">*</span></label>
+              <input type="date" class="form-input" id="dob" name="dob" />
+              <div class="error-message" id="dobError"></div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="placeOfBirth">Place of Birth <span class="required">*</span></label>
+              <input type="text" class="form-input" id="placeOfBirth" name="placeOfBirth" placeholder="City / Town / Village" />
+              <div class="error-message" id="placeOfBirthError"></div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="gender">Gender <span class="required">*</span></label>
+              <select class="form-select" id="gender" name="gender">
+                <option value="">-- Select --</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+              <div class="error-message" id="genderError"></div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="maritalStatus">Marital Status <span class="required">*</span></label>
+              <select class="form-select" id="maritalStatus" name="maritalStatus">
+                <option value="">-- Select --</option>
+                <option value="Single">Single</option>
+                <option value="Married">Married</option>
+                <option value="Divorced">Divorced</option>
+                <option value="Widow/Widower">Widow / Widower</option>
+              </select>
+              <div class="error-message" id="maritalStatusError"></div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="citizenship">Citizenship <span class="required">*</span></label>
+              <select class="form-select" id="citizenship" name="citizenship">
+                <option value="">-- Select --</option>
+                <option value="By Birth">Indian Citizen by Birth</option>
+                <option value="By Descent">By Descent</option>
+                <option value="By Registration">By Registration</option>
+                <option value="By Naturalization">By Naturalization</option>
+              </select>
+              <div class="error-message" id="citizenshipError"></div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="educationQualification">Education <span class="required">*</span></label>
+              <select class="form-select" id="educationQualification" name="educationQualification">
+                <option value="">-- Select --</option>
+                <option value="Below Matriculation">Below Matriculation</option>
+                <option value="Matriculation">Matriculation (10th)</option>
+                <option value="Senior Secondary">Senior Secondary (12th)</option>
+                <option value="Graduate">Graduate</option>
+                <option value="Post Graduate">Post Graduate & Above</option>
+              </select>
+              <div class="error-message" id="educationQualificationError"></div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="employmentType">Employment <span class="required">*</span></label>
+              <select class="form-select" id="employmentType" name="employmentType">
+                <option value="">-- Select --</option>
+                <option value="Government">Government Employee</option>
+                <option value="Private">Private Sector</option>
+                <option value="Self-Employed">Self-Employed</option>
+                <option value="Student">Student</option>
+                <option value="Homemaker">Homemaker</option>
+                <option value="Retired">Retired</option>
+                <option value="Not Employed">Not Employed</option>
+              </select>
+              <div class="error-message" id="employmentTypeError"></div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="organizationName">Organization</label>
+              <input type="text" class="form-input" id="organizationName" name="organizationName" placeholder="Company name (optional)" />
+            </div>
+          </div>
+          <div class="step-nav"><button type="button" class="btn btn-secondary step-prev" data-to="1">← Back</button><button type="button" class="btn btn-primary step-next" data-to="3">Next: Family Info →</button></div>
+        </div>
+      </div>
+
+      <!-- ========== STEP 3: FAMILY DETAILS ========== -->
+      <div class="step-content" id="step3">
+        <div class="section-card">
+          <div class="section-title"><span class="icon">👨‍👩‍👧</span> Family Details</div>
+          <div class="section-subtitle">Enter your parent's and spouse's details</div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label" for="fatherName">Father's Full Name <span class="required">*</span></label>
+              <input type="text" class="form-input" id="fatherName" name="fatherName" placeholder="Father's full name" />
+              <div class="error-message" id="fatherNameError"></div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="motherName">Mother's Full Name <span class="required">*</span></label>
+              <input type="text" class="form-input" id="motherName" name="motherName" placeholder="Mother's full name" />
+              <div class="error-message" id="motherNameError"></div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="spouseName">Spouse's Name</label>
+              <input type="text" class="form-input" id="spouseName" name="spouseName" placeholder="Spouse's full name (if married)" />
+            </div>
+          </div>
+          <div class="step-nav"><button type="button" class="btn btn-secondary step-prev" data-to="2">← Back</button><button type="button" class="btn btn-primary step-next" data-to="4">Next: Contact & Address →</button></div>
+        </div>
+      </div>
+
+      <!-- ========== STEP 4: CONTACT & ADDRESS ========== -->
+      <div class="step-content" id="step4">
+        <div class="section-card">
+          <div class="section-title"><span class="icon">📞</span> Contact & Address</div>
+          <div class="section-subtitle">Provide your contact information and residential address</div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label" for="mobile">Mobile Number <span class="required">*</span></label>
+              <input type="tel" class="form-input" id="mobile" name="mobile" placeholder="10-digit number" maxlength="10" />
+              <div class="error-message" id="mobileError"></div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="email">Email Address <span class="required">*</span></label>
+              <input type="email" class="form-input" id="email" name="email" placeholder="your.email@example.com" />
+              <div class="error-message" id="emailError"></div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="aadhaarNumber">Aadhaar Number <span class="required">*</span></label>
+              <input type="text" class="form-input" id="aadhaarNumber" name="aadhaarNumber" placeholder="XXXX XXXX XXXX" maxlength="14" />
+              <div class="error-message" id="aadhaarNumberError"></div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="panNumber">PAN Card Number</label>
+              <input type="text" class="form-input" id="panNumber" name="panNumber" placeholder="ABCDE1234F" maxlength="10" style="text-transform:uppercase" />
+              <div class="error-message" id="panNumberError"></div>
+            </div>
+          </div>
+          <h3 style="font-size:15px;font-weight:700;margin:28px 0 16px">📍 Present Residential Address</h3>
+          <div class="form-grid">
+            <div class="form-group full-width">
+              <label class="form-label" for="presentAddress">Address Line <span class="required">*</span></label>
+              <textarea class="form-textarea" id="presentAddress" name="presentAddress" rows="2" placeholder="House No., Street, Locality"></textarea>
+              <div class="error-message" id="presentAddressError"></div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="presentCity">City / District <span class="required">*</span></label>
+              <input type="text" class="form-input" id="presentCity" name="presentCity" placeholder="e.g. New Delhi" />
+              <div class="error-message" id="presentCityError"></div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="presentState">State <span class="required">*</span></label>
+              <select class="form-select" id="presentState" name="presentState">
+                <option value="">-- Select --</option>
+                <option>Andhra Pradesh</option><option>Arunachal Pradesh</option><option>Assam</option><option>Bihar</option><option>Chhattisgarh</option><option>Delhi</option><option>Goa</option><option>Gujarat</option><option>Haryana</option><option>Himachal Pradesh</option><option>Jharkhand</option><option>Karnataka</option><option>Kerala</option><option>Madhya Pradesh</option><option>Maharashtra</option><option>Manipur</option><option>Meghalaya</option><option>Mizoram</option><option>Nagaland</option><option>Odisha</option><option>Punjab</option><option>Rajasthan</option><option>Sikkim</option><option>Tamil Nadu</option><option>Telangana</option><option>Tripura</option><option>Uttar Pradesh</option><option>Uttarakhand</option><option>West Bengal</option><option>Chandigarh</option><option>Jammu & Kashmir</option><option>Ladakh</option>
+              </select>
+              <div class="error-message" id="presentStateError"></div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="presentPincode">PIN Code <span class="required">*</span></label>
+              <input type="text" class="form-input" id="presentPincode" name="presentPincode" placeholder="6-digit PIN" maxlength="6" />
+              <div class="error-message" id="presentPincodeError"></div>
+            </div>
+          </div>
+          <h3 style="font-size:15px;font-weight:700;margin:28px 0 16px">🏛️ Nearest Passport Seva Kendra</h3>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label" for="pskCity">Select Nearest City <span class="required">*</span></label>
+              <select class="form-select" id="pskCity" name="pskCity">
+                <option value="">-- Select PSK City --</option>
+                <option>Ahmedabad</option><option>Amritsar</option><option>Bangalore</option><option>Bhopal</option><option>Bhubaneswar</option><option>Chandigarh</option><option>Chennai</option><option>Coimbatore</option><option>Dehradun</option><option>Delhi</option><option>Ghaziabad</option><option>Goa</option><option>Gurgaon</option><option>Guwahati</option><option>Hyderabad</option><option>Indore</option><option>Jaipur</option><option>Jammu</option><option>Kanpur</option><option>Kochi</option><option>Kolkata</option><option>Lucknow</option><option>Ludhiana</option><option>Mumbai</option><option>Nagpur</option><option>Noida</option><option>Patna</option><option>Pune</option><option>Raipur</option><option>Ranchi</option><option>Surat</option><option>Thiruvananthapuram</option><option>Vadodara</option><option>Varanasi</option><option>Visakhapatnam</option>
+              </select>
+              <div class="error-message" id="pskCityError"></div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="policeStation">Nearest Police Station</label>
+              <input type="text" class="form-input" id="policeStation" name="policeStation" placeholder="e.g. Sadar Bazaar PS" />
+            </div>
+          </div>
+          <h3 style="font-size:15px;font-weight:700;margin:28px 0 16px">🚨 Emergency Contact</h3>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label" for="emergencyName">Contact Name <span class="required">*</span></label>
+              <input type="text" class="form-input" id="emergencyName" name="emergencyName" placeholder="Full name" />
+              <div class="error-message" id="emergencyNameError"></div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="emergencyPhone">Contact Phone <span class="required">*</span></label>
+              <input type="tel" class="form-input" id="emergencyPhone" name="emergencyPhone" placeholder="10-digit mobile" maxlength="10" />
+              <div class="error-message" id="emergencyPhoneError"></div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="emergencyRelation">Relationship <span class="required">*</span></label>
+              <select class="form-select" id="emergencyRelation" name="emergencyRelation">
+                <option value="">-- Select --</option>
+                <option>Father</option><option>Mother</option><option>Spouse</option><option>Sibling</option><option>Friend</option><option>Other</option>
+              </select>
+              <div class="error-message" id="emergencyRelationError"></div>
+            </div>
+          </div>
+          <div class="step-nav"><button type="button" class="btn btn-secondary step-prev" data-to="3">← Back</button><button type="button" class="btn btn-primary step-next" data-to="5">Next: Documents →</button></div>
+        </div>
+      </div>
+
+      <!-- ========== STEP 5: DOCUMENTS ========== -->
+      <div class="step-content" id="step5">
+        <div class="section-card">
+          <div class="section-title"><span class="icon">📎</span> Required Documents</div>
+          <div class="section-subtitle">Upload clear, legible scans or photos (Max 2MB each · JPG, PNG, WebP)</div>
+          <div class="doc-upload-list" id="docUploadList">
+
+            <div class="doc-upload-item" id="doc_passportPhoto">
+              <div class="doc-upload-info">
+                <div class="doc-upload-icon">📷</div>
+                <div class="doc-upload-details">
+                  <div class="doc-upload-name">Passport Size Photograph <span class="required">*</span></div>
+                  <div class="doc-upload-desc">Recent colour photo with white background (3.5cm × 4.5cm)</div>
+                </div>
+              </div>
+              <div class="doc-upload-status" id="status_passportPhoto"><span class="doc-status-text not-uploaded">Not Uploaded</span></div>
+              <div class="doc-upload-actions">
+                <label class="btn btn-secondary btn-sm doc-choose-btn" for="file_passportPhoto">📁 Choose File</label>
+                <button type="button" class="btn btn-danger btn-sm doc-remove-btn hidden" id="remove_passportPhoto">🗑️ Remove</button>
+                <label class="btn btn-secondary btn-sm doc-reupload-btn hidden" for="file_passportPhoto" id="reupload_passportPhoto">🔄 Re-upload</label>
+              </div>
+              <input type="file" class="hidden" id="file_passportPhoto" accept="image/jpeg,image/png,image/webp" data-dockey="passportPhoto" />
+              <div class="doc-upload-preview hidden" id="preview_passportPhoto"><img id="img_passportPhoto" alt="Photo preview" /></div>
+              <div class="error-message" id="error_passportPhoto"></div>
+            </div>
+
+            <div class="doc-upload-item" id="doc_aadhaarCard">
+              <div class="doc-upload-info">
+                <div class="doc-upload-icon">🪪</div>
+                <div class="doc-upload-details">
+                  <div class="doc-upload-name">Aadhaar Card <span class="required">*</span></div>
+                  <div class="doc-upload-desc">Front and back of your Aadhaar card</div>
+                </div>
+              </div>
+              <div class="doc-upload-status" id="status_aadhaarCard"><span class="doc-status-text not-uploaded">Not Uploaded</span></div>
+              <div class="doc-upload-actions">
+                <label class="btn btn-secondary btn-sm doc-choose-btn" for="file_aadhaarCard">📁 Choose File</label>
+                <button type="button" class="btn btn-danger btn-sm doc-remove-btn hidden" id="remove_aadhaarCard">🗑️ Remove</button>
+                <label class="btn btn-secondary btn-sm doc-reupload-btn hidden" for="file_aadhaarCard" id="reupload_aadhaarCard">🔄 Re-upload</label>
+              </div>
+              <input type="file" class="hidden" id="file_aadhaarCard" accept="image/jpeg,image/png,image/webp" data-dockey="aadhaarCard" />
+              <div class="doc-upload-preview hidden" id="preview_aadhaarCard"><img id="img_aadhaarCard" alt="Aadhaar preview" /></div>
+              <div class="error-message" id="error_aadhaarCard"></div>
+            </div>
+
+            <div class="doc-upload-item" id="doc_panCard">
+              <div class="doc-upload-info">
+                <div class="doc-upload-icon">💳</div>
+                <div class="doc-upload-details">
+                  <div class="doc-upload-name">PAN Card</div>
+                  <div class="doc-upload-desc">Clear image of your PAN card (optional)</div>
+                </div>
+              </div>
+              <div class="doc-upload-status" id="status_panCard"><span class="doc-status-text not-uploaded">Not Uploaded</span></div>
+              <div class="doc-upload-actions">
+                <label class="btn btn-secondary btn-sm doc-choose-btn" for="file_panCard">📁 Choose File</label>
+                <button type="button" class="btn btn-danger btn-sm doc-remove-btn hidden" id="remove_panCard">🗑️ Remove</button>
+                <label class="btn btn-secondary btn-sm doc-reupload-btn hidden" for="file_panCard" id="reupload_panCard">🔄 Re-upload</label>
+              </div>
+              <input type="file" class="hidden" id="file_panCard" accept="image/jpeg,image/png,image/webp" data-dockey="panCard" />
+              <div class="doc-upload-preview hidden" id="preview_panCard"><img id="img_panCard" alt="PAN preview" /></div>
+              <div class="error-message" id="error_panCard"></div>
+            </div>
+
+            <div class="doc-upload-item" id="doc_birthCertificate">
+              <div class="doc-upload-info">
+                <div class="doc-upload-icon">📜</div>
+                <div class="doc-upload-details">
+                  <div class="doc-upload-name">Date of Birth Proof <span class="required">*</span></div>
+                  <div class="doc-upload-desc">Birth Certificate / 10th Marksheet showing DOB</div>
+                </div>
+              </div>
+              <div class="doc-upload-status" id="status_birthCertificate"><span class="doc-status-text not-uploaded">Not Uploaded</span></div>
+              <div class="doc-upload-actions">
+                <label class="btn btn-secondary btn-sm doc-choose-btn" for="file_birthCertificate">📁 Choose File</label>
+                <button type="button" class="btn btn-danger btn-sm doc-remove-btn hidden" id="remove_birthCertificate">🗑️ Remove</button>
+                <label class="btn btn-secondary btn-sm doc-reupload-btn hidden" for="file_birthCertificate" id="reupload_birthCertificate">🔄 Re-upload</label>
+              </div>
+              <input type="file" class="hidden" id="file_birthCertificate" accept="image/jpeg,image/png,image/webp" data-dockey="birthCertificate" />
+              <div class="doc-upload-preview hidden" id="preview_birthCertificate"><img id="img_birthCertificate" alt="DOB proof preview" /></div>
+              <div class="error-message" id="error_birthCertificate"></div>
+            </div>
+
+            <div class="doc-upload-item" id="doc_addressProof">
+              <div class="doc-upload-info">
+                <div class="doc-upload-icon">🏠</div>
+                <div class="doc-upload-details">
+                  <div class="doc-upload-name">Address Proof <span class="required">*</span></div>
+                  <div class="doc-upload-desc">Aadhaar / Voter ID / Utility Bill / Bank Statement</div>
+                </div>
+              </div>
+              <div class="doc-upload-status" id="status_addressProof"><span class="doc-status-text not-uploaded">Not Uploaded</span></div>
+              <div class="doc-upload-actions">
+                <label class="btn btn-secondary btn-sm doc-choose-btn" for="file_addressProof">📁 Choose File</label>
+                <button type="button" class="btn btn-danger btn-sm doc-remove-btn hidden" id="remove_addressProof">🗑️ Remove</button>
+                <label class="btn btn-secondary btn-sm doc-reupload-btn hidden" for="file_addressProof" id="reupload_addressProof">🔄 Re-upload</label>
+              </div>
+              <input type="file" class="hidden" id="file_addressProof" accept="image/jpeg,image/png,image/webp" data-dockey="addressProof" />
+              <div class="doc-upload-preview hidden" id="preview_addressProof"><img id="img_addressProof" alt="Address proof preview" /></div>
+              <div class="error-message" id="error_addressProof"></div>
+            </div>
+
+            <div class="doc-upload-item" id="doc_signature">
+              <div class="doc-upload-info">
+                <div class="doc-upload-icon">✍️</div>
+                <div class="doc-upload-details">
+                  <div class="doc-upload-name">Applicant's Signature <span class="required">*</span></div>
+                  <div class="doc-upload-desc">Scan or photo of your signature on white paper</div>
+                </div>
+              </div>
+              <div class="doc-upload-status" id="status_signature"><span class="doc-status-text not-uploaded">Not Uploaded</span></div>
+              <div class="doc-upload-actions">
+                <label class="btn btn-secondary btn-sm doc-choose-btn" for="file_signature">📁 Choose File</label>
+                <button type="button" class="btn btn-danger btn-sm doc-remove-btn hidden" id="remove_signature">🗑️ Remove</button>
+                <label class="btn btn-secondary btn-sm doc-reupload-btn hidden" for="file_signature" id="reupload_signature">🔄 Re-upload</label>
+              </div>
+              <input type="file" class="hidden" id="file_signature" accept="image/jpeg,image/png,image/webp" data-dockey="signature" />
+              <div class="doc-upload-preview hidden" id="preview_signature"><img id="img_signature" alt="Signature preview" /></div>
+              <div class="error-message" id="error_signature"></div>
+            </div>
+
+          </div>
+          <div class="step-nav"><button type="button" class="btn btn-secondary step-prev" data-to="4">← Back</button><button type="button" class="btn btn-primary step-next" data-to="6">Next: Appointment →</button></div>
+        </div>
+      </div>
+
+      <!-- ========== STEP 6: APPOINTMENT ========== -->
+      <div class="step-content" id="step6">
+        <div class="section-card">
+          <div class="section-title"><span class="icon">📅</span> Appointment Booking</div>
+          <div class="section-subtitle">Select a date and available time slot for your visit to the Passport Seva Kendra</div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label" for="appointmentDate">Preferred Date <span class="required">*</span></label>
+              <input type="date" class="form-input" id="appointmentDate" name="appointmentDate" />
+              <div class="error-message" id="appointmentDateError"></div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Selected Slot</label>
+              <input type="text" class="form-input" id="selectedSlotDisplay" readonly placeholder="Select a time slot below" />
+            </div>
+          </div>
+          <div class="slots-grid" id="slotsGrid">
+            <p style="color:var(--text-muted);font-size:14px;">Select a date to see available slots.</p>
+          </div>
+          <div class="error-message" id="slotError" style="margin-top:12px"></div>
+          <div class="step-nav"><button type="button" class="btn btn-secondary step-prev" data-to="5">← Back</button><button type="button" class="btn btn-primary step-next" data-to="7">Next: Review & Submit →</button></div>
+        </div>
+      </div>
+
+      <!-- ========== STEP 7: REVIEW & SUBMIT ========== -->
+      <div class="step-content" id="step7">
+        <div class="section-card">
+          <div class="section-title"><span class="icon">📜</span> Review Your Application</div>
+          <div class="section-subtitle">Please review all details before submitting. You can go back to edit any step.</div>
+
+          <div id="reviewSummary" style="margin-bottom:24px">
+            <!-- populated by JS -->
+          </div>
+
+          <div class="declaration-box">
+            <p>I hereby declare that all the information furnished by me in this application is true and correct to the best of my knowledge. I understand that furnishing incorrect or false information is a punishable offence under the Passports Act, 1967.</p>
+            <label class="checkbox-label" style="margin-top:16px;display:flex;align-items:flex-start;gap:10px;cursor:pointer;">
+              <input type="checkbox" id="declaration" style="margin-top:4px;accent-color:var(--accent);width:18px;height:18px;flex-shrink:0;" />
+              <span style="font-size:14px;color:var(--text-primary);font-weight:500;">I agree to the above declaration and confirm that all details are accurate. <span class="required">*</span></span>
+            </label>
+            <div class="error-message" id="declarationError"></div>
+          </div>
+
+          <div class="step-nav">
+            <button type="button" class="btn btn-secondary step-prev" data-to="6">← Back</button>
+            <button type="submit" class="btn btn-primary" id="btnSubmit" disabled>🚀 Submit Application</button>
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </main>
+
+  <script src="js/shared.js"></script>
+  <script src="js/apply.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/chatbot.js"></script>
+</body>
+</html>

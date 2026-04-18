@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Login or Sign Up to PassportEase — Your online passport application portal." />
+  <title>Login — PassportEase</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">🛂</div>
+        <div class="logo-text">Passport<span>Ease</span></div>
+      </a>
+      <div class="header-actions">
+        <button class="btn-icon" id="themeToggle" title="Toggle Dark Mode">🌙</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <main class="auth-page">
+    <div class="auth-card">
+      <!-- Tabs -->
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="tabLogin" data-tab="login">Login</button>
+        <button class="auth-tab" id="tabSignup" data-tab="signup">Sign Up</button>
+      </div>
+
+      <!-- LOGIN FORM -->
+      <div class="auth-form active" id="formLogin">
+        <h2 class="auth-title">Welcome Back 👋</h2>
+        <p class="auth-subtitle">Login to continue your passport application</p>
+
+        <!-- Method Toggle -->
+        <div class="auth-method-toggle">
+          <button class="auth-method active" data-method="email" id="loginMethodEmail">📧 Email</button>
+          <button class="auth-method" data-method="phone" id="loginMethodPhone">📱 Phone</button>
+        </div>
+
+        <!-- Email Login -->
+        <div class="auth-method-form active" id="loginEmailForm">
+          <div class="form-group">
+            <label class="form-label" for="loginEmail">Email Address</label>
+            <input type="email" class="form-input" id="loginEmail" placeholder="your.email@gmail.com" />
+            <div class="error-message" id="loginEmailError"></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="loginPassword">Password</label>
+            <input type="password" class="form-input" id="loginPassword" placeholder="Enter your password" />
+            <div class="error-message" id="loginPasswordError"></div>
+          </div>
+        </div>
+
+        <!-- Phone Login -->
+        <div class="auth-method-form" id="loginPhoneForm">
+          <div class="form-group">
+            <label class="form-label" for="loginPhone">Mobile Number</label>
+            <div style="display:flex;gap:8px">
+              <input type="text" class="form-input" value="+91" readonly style="width:60px;text-align:center;flex-shrink:0" />
+              <input type="tel" class="form-input" id="loginPhone" placeholder="9876543210" maxlength="10" />
+            </div>
+            <div class="error-message" id="loginPhoneError"></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="loginOtp">OTP</label>
+            <div style="display:flex;gap:8px;align-items:flex-start">
+              <input type="text" class="form-input" id="loginOtp" placeholder="6-digit OTP" maxlength="6" />
+              <button type="button" class="btn btn-secondary btn-sm" id="sendLoginOtp" style="white-space:nowrap;padding:12px 16px">Send OTP</button>
+            </div>
+            <div class="error-message" id="loginOtpError"></div>
+          </div>
+        </div>
+
+        <button class="btn btn-primary auth-submit" id="btnLogin" style="width:100%;margin-top:8px">🔐 Login</button>
+
+        <div class="auth-divider"><span>or continue with</span></div>
+
+        <button class="btn auth-google-btn" id="btnGoogleLogin">
+          <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+          <span>Sign in with Google</span>
+        </button>
+
+        <p class="auth-footer-text">Don't have an account? <a href="#" id="switchToSignup">Sign up here</a></p>
+      </div>
+
+      <!-- SIGNUP FORM -->
+      <div class="auth-form" id="formSignup">
+        <h2 class="auth-title">Create Account ✨</h2>
+        <p class="auth-subtitle">Register to start your passport application</p>
+
+        <!-- Method Toggle -->
+        <div class="auth-method-toggle">
+          <button class="auth-method active" data-method="email" id="signupMethodEmail">📧 Email</button>
+          <button class="auth-method" data-method="phone" id="signupMethodPhone">📱 Phone</button>
+        </div>
+
+        <!-- Email Signup -->
+        <div class="auth-method-form active" id="signupEmailForm">
+          <div class="form-group">
+            <label class="form-label" for="signupName">Full Name</label>
+            <input type="text" class="form-input" id="signupName" placeholder="Enter your full name" />
+            <div class="error-message" id="signupNameError"></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="signupEmail">Email Address</label>
+            <input type="email" class="form-input" id="signupEmail" placeholder="your.email@gmail.com" />
+            <div class="error-message" id="signupEmailError"></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="signupPassword">Password</label>
+            <input type="password" class="form-input" id="signupPassword" placeholder="Min 6 characters" />
+            <div class="error-message" id="signupPasswordError"></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="signupConfirm">Confirm Password</label>
+            <input type="password" class="form-input" id="signupConfirm" placeholder="Re-enter password" />
+            <div class="error-message" id="signupConfirmError"></div>
+          </div>
+        </div>
+
+        <!-- Phone Signup -->
+        <div class="auth-method-form" id="signupPhoneForm">
+          <div class="form-group">
+            <label class="form-label" for="signupPhoneName">Full Name</label>
+            <input type="text" class="form-input" id="signupPhoneName" placeholder="Enter your full name" />
+            <div class="error-message" id="signupPhoneNameError"></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="signupPhone">Mobile Number</label>
+            <div style="display:flex;gap:8px">
+              <input type="text" class="form-input" value="+91" readonly style="width:60px;text-align:center;flex-shrink:0" />
+              <input type="tel" class="form-input" id="signupPhone" placeholder="9876543210" maxlength="10" />
+            </div>
+            <div class="error-message" id="signupPhoneError"></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="signupPhoneOtp">OTP</label>
+            <div style="display:flex;gap:8px;align-items:flex-start">
+              <input type="text" class="form-input" id="signupPhoneOtp" placeholder="6-digit OTP" maxlength="6" />
+              <button type="button" class="btn btn-secondary btn-sm" id="sendSignupOtp" style="white-space:nowrap;padding:12px 16px">Send OTP</button>
+            </div>
+            <div class="error-message" id="signupPhoneOtpError"></div>
+          </div>
+        </div>
+
+        <button class="btn btn-primary auth-submit" id="btnSignup" style="width:100%;margin-top:8px">🚀 Create Account</button>
+
+        <div class="auth-divider"><span>or continue with</span></div>
+
+        <button class="btn auth-google-btn" id="btnGoogleSignup">
+          <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+          <span>Sign up with Google</span>
+        </button>
+
+        <p class="auth-footer-text">Already have an account? <a href="#" id="switchToLogin">Login here</a></p>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/shared.js"></script>
+  <script src="js/login.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/chatbot.js"></script>
+</body>
+</html>

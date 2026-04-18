@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Track your passport application status — view submitted applications, download PDFs, and monitor progress." />
+  <title>Track Application — PassportEase</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ACCESSIBILITY TOP BAR -->
+  <div class="accessibility-bar" id="accessibilityBar">
+    <div class="accessibility-bar-inner">
+      <div class="accessibility-left">
+        <span class="accessibility-date" id="accessDate"></span>
+      </div>
+      <div class="accessibility-right">
+        <a href="#mainContent" class="accessibility-link">Skip to Main Content</a>
+        <span class="accessibility-divider"></span>
+        <a href="#" class="accessibility-link">Screen Reader Access</a>
+        <span class="accessibility-divider"></span>
+        <div class="font-size-controls">
+          <button class="font-size-btn fs-small" data-fontsize="small" title="Decrease Font Size">A-</button>
+          <button class="font-size-btn fs-normal active" data-fontsize="normal" title="Normal Font Size">A</button>
+          <button class="font-size-btn fs-large" data-fontsize="large" title="Increase Font Size">A+</button>
+        </div>
+        <span class="accessibility-divider"></span>
+        <div class="accessibility-call">
+          <span>📞</span> National Call Center <strong style="margin-left:4px;color:#fbbf24">1800-258-1800</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">🛂</div>
+        <div class="logo-text">Passport<span>Ease</span></div>
+      </a>
+      <nav class="nav-links">
+        <a href="admin.html" class="nav-link">🔧 Admin</a>
+      </nav>
+      <div class="header-actions">
+        <button class="btn-icon" id="themeToggle" title="Toggle Dark Mode" aria-label="Toggle theme">🌙</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <main class="main-container fade-in">
+    <div class="page-header">
+      <h1 class="page-title" data-i18n="track.title">📍 Track Your Applications</h1>
+      <p class="page-subtitle" data-i18n="track.subtitle">View the status of all your submitted passport applications</p>
+    </div>
+
+    <!-- Application List -->
+    <div id="appListContainer">
+      <!-- populated by JS -->
+    </div>
+
+    <div class="no-data hidden" id="noAppsMsg">
+      <div class="empty-icon">📭</div>
+      <p>No applications found. <a href="apply.html">Apply for a passport</a> to get started!</p>
+    </div>
+  </main>
+
+  <!-- Print area (hidden, used for PDF) -->
+  <div class="print-area" id="printArea"></div>
+
+  <script src="js/shared.js"></script>
+  <script src="js/track.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/chatbot.js"></script>
+</body>
+</html>

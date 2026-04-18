@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Police Verification Dashboard — Verify passport applicants against criminal records" />
+  <title>Police Verification — PassportEase</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ACCESSIBILITY TOP BAR -->
+  <div class="accessibility-bar" id="accessibilityBar">
+    <div class="accessibility-bar-inner">
+      <div class="accessibility-left">
+        <span class="accessibility-date" id="accessDate"></span>
+      </div>
+      <div class="accessibility-right">
+        <a href="#mainContent" class="accessibility-link">Skip to Main Content</a>
+        <span class="accessibility-divider"></span>
+        <div class="font-size-controls">
+          <button class="font-size-btn fs-small" data-fontsize="small" title="Decrease Font Size">A-</button>
+          <button class="font-size-btn fs-normal active" data-fontsize="normal" title="Normal Font Size">A</button>
+          <button class="font-size-btn fs-large" data-fontsize="large" title="Increase Font Size">A+</button>
+        </div>
+        <span class="accessibility-divider"></span>
+        <div class="accessibility-call">
+          <span>📞</span> National Call Center <strong style="margin-left:4px;color:#fbbf24">1800-258-1800</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">🛂</div>
+        <div class="logo-text">Passport<span>Ease</span></div>
+      </a>
+      <nav class="nav-links">
+        <a href="police.html" class="nav-link">🛡️ Verification</a>
+      </nav>
+      <div class="header-actions">
+        <div class="user-bar" id="userBar"></div>
+        <button class="btn-icon" id="themeToggle" title="Toggle Dark Mode">🌙</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <main class="main-container fade-in">
+    <div class="page-header">
+      <h1 class="page-title">🛡️ Police Verification Dashboard</h1>
+      <p class="page-subtitle" id="pageSubtitle">Verify passport applicants assigned to your city</p>
+    </div>
+
+    <!-- City Badge -->
+    <div class="police-city-badge" id="cityBadge">
+      📍 Assigned City: <strong id="assignedCity">—</strong>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-grid" id="policeStats">
+      <div class="stat-card">
+        <div class="stat-icon" style="background:rgba(59,130,246,.12);color:#3b82f6">📋</div>
+        <div class="stat-info">
+          <div class="stat-value" id="statPending">0</div>
+          <div class="stat-label">Pending Verification</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon approved">✅</div>
+        <div class="stat-info">
+          <div class="stat-value" id="statCleared">0</div>
+          <div class="stat-label">Cleared</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon rejected">❌</div>
+        <div class="stat-info">
+          <div class="stat-value" id="statFlagged">0</div>
+          <div class="stat-label">Flagged / Rejected</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pending Verifications -->
+    <div class="section-card">
+      <div class="section-title"><span class="icon">📋</span> Pending Police Verifications</div>
+      <div class="section-subtitle">Applications where documents are verified and awaiting your police verification</div>
+
+      <div id="pendingList">
+        <!-- populated by JS -->
+      </div>
+      <div class="no-data hidden" id="noPendingData">
+        <div class="empty-icon">📂</div>
+        <p>No pending verifications for your city.</p>
+      </div>
+    </div>
+
+    <!-- Completed -->
+    <div class="section-card" style="margin-top:24px">
+      <div class="section-title"><span class="icon">✅</span> Completed Verifications</div>
+      <div id="completedList"></div>
+      <div class="no-data hidden" id="noCompletedData">
+        <div class="empty-icon">📂</div>
+        <p>No completed verifications yet.</p>
+      </div>
+    </div>
+
+    <!-- Criminal Check Modal -->
+    <div class="admin-detail-overlay hidden" id="verifyOverlay">
+      <div class="admin-detail-modal" style="max-width:900px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+          <h2 style="font-size:20px;font-weight:700;">🛡️ Police Verification</h2>
+          <button class="btn btn-secondary btn-sm" id="closeVerifyModal">✕ Close</button>
+        </div>
+        <div id="verifyContent"></div>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/shared.js"></script>
+  <script src="js/police.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/chatbot.js"></script>
+</body>
+</html>

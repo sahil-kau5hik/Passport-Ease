@@ -1,0 +1,180 @@
+/* ================================================================
+   login.js — User login / signup logic (localStorage simulation)
+   ================================================================ */
+(function () {
+  'use strict';
+
+  const $ = id => document.getElementById(id);
+  const LS_USERS = 'pe_users';
+  const LS_SESSION = 'pe_session';
+
+  // If already logged in, redirect
+  const session = JSON.parse(localStorage.getItem(LS_SESSION) || 'null');
+  if (session && session.role === 'user') {
+    window.location.href = 'index.html';
+    return;
+  }
+
+  // ===== TAB SWITCHING =====
+  $('tabLogin').addEventListener('click', () => switchTab('login'));
+  $('tabSignup').addEventListener('click', () => switchTab('signup'));
+  $('switchToSignup').addEventListener('click', e => { e.preventDefault(); switchTab('signup'); });
+  $('switchToLogin').addEventListener('click', e => { e.preventDefault(); switchTab('login'); });
+
+  function switchTab(tab) {
+    document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+    if (tab === 'login') {
+      $('tabLogin').classList.add('active');
+      $('formLogin').classList.add('active');
+    } else {
+      $('tabSignup').classList.add('active');
+      $('formSignup').classList.add('active');
+    }
+  }
+
+  // ===== METHOD TOGGLE (Email / Phone) =====
+  function setupMethodToggle(prefix, emailFormId, phoneFormId) {
+    const emailBtn = $(`${prefix}MethodEmail`);
+    const phoneBtn = $(`${prefix}MethodPhone`);
+    emailBtn.addEventListener('click', () => {
+      emailBtn.classList.add('active');
+      phoneBtn.classList.remove('active');
+      $(emailFormId).classList.add('active');
+      $(phoneFormId).classList.remove('active');
+    });
+    phoneBtn.addEventListener('click', () => {
+      phoneBtn.classList.add('active');
+      emailBtn.classList.remove('active');
+      $(phoneFormId).classList.add('active');
+      $(emailFormId).classList.remove('active');
+    });
+  }
+  setupMethodToggle('login', 'loginEmailForm', 'loginPhoneForm');
+  setupMethodToggle('signup', 'signupEmailForm', 'signupPhoneForm');
+
+  // ===== HELPERS =====
+  function getUsers() { return JSON.parse(localStorage.getItem(LS_USERS) || '[]'); }
+  function saveUsers(u) { localStorage.setItem(LS_USERS, JSON.stringify(u)); }
+  function showE(id, msg) { $(id).textContent = msg; $(id).classList.add('visible'); }
+  function clearE(id) { $(id).textContent = ''; $(id).classList.remove('visible'); }
+  function clearErrors() { document.querySelectorAll('.error-message').forEach(e => { e.textContent = ''; e.classList.remove('visible'); }); }
+
+  function createSession(user) {
+    localStorage.setItem(LS_SESSION, JSON.stringify({
+      role: 'user',
+      name: user.name,
+      email: user.email || '',
+      phone: user.phone || '',
+      loginAt: new Date().toISOString()
+    }));
+  }
+
+  // ===== OTP SIMULATION =====
+  let generatedOtp = '';
+  function simulateOtp(btnId) {
+    generatedOtp = String(Math.floor(100000 + Math.random() * 900000));
+    showToast(`OTP sent! (Demo OTP: ${generatedOtp})`, 'info');
+    const btn = $(btnId);
+    btn.disabled = true;
+    btn.textContent = 'Resend (30s)';
+    let t = 30;
+    const timer = setInterval(() => {
+      t--;
+      btn.textContent = `Resend (${t}s)`;
+      if (t <= 0) { clearInterval(timer); btn.disabled = false; btn.textContent = 'Send OTP'; }
+    }, 1000);
+  }
+
+  $('sendLoginOtp').addEventListener('click', () => {
+    const phone = $('loginPhone').value.trim();
+    if (!/^[6-9]\d{9}$/.test(phone)) { showE('loginPhoneError', 'Enter valid 10-digit number'); return; }
+    clearE('loginPhoneError');
+    simulateOtp('sendLoginOtp');
+  });
+
+  $('sendSignupOtp').addEventListener('click', () => {
+    const phone = $('signupPhone').value.trim();
+    if (!/^[6-9]\d{9}$/.test(phone)) { showE('signupPhoneError', 'Enter valid 10-digit number'); return; }
+    clearE('signupPhoneError');
+    simulateOtp('sendSignupOtp');
+  });
+
+  // ===== LOGIN =====
+  $('btnLogin').addEventListener('click', () => {
+    clearErrors();
+    const isPhone = $('loginMethodPhone').classList.contains('active');
+    const users = getUsers();
+
+    if (isPhone) {
+      const phone = $('loginPhone').value.trim();
+      const otp = $('loginOtp').value.trim();
+      if (!/^[6-9]\d{9}$/.test(phone)) { showE('loginPhoneError', 'Enter valid 10-digit number'); return; }
+      if (!otp || otp.length !== 6) { showE('loginOtpError', 'Enter 6-digit OTP'); return; }
+      if (otp !== generatedOtp) { showE('loginOtpError', 'Invalid OTP. Try again.'); return; }
+      const user = users.find(u => u.phone === phone);
+      if (!user) { showE('loginPhoneError', 'No account with this number. Please sign up.'); return; }
+      createSession(user);
+    } else {
+      const email = $('loginEmail').value.trim().toLowerCase();
+      const pass = $('loginPassword').value;
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showE('loginEmailError', 'Enter valid email'); return; }
+      if (!pass) { showE('loginPasswordError', 'Enter password'); return; }
+      const user = users.find(u => u.email === email && u.password === pass);
+      if (!user) { showE('loginPasswordError', 'Invalid email or password'); return; }
+      createSession(user);
+    }
+
+    showToast('Login successful! Redirecting...', 'success');
+    setTimeout(() => window.location.href = 'index.html', 1000);
+  });
+
+  // ===== SIGNUP =====
+  $('btnSignup').addEventListener('click', () => {
+    clearErrors();
+    const isPhone = $('signupMethodPhone').classList.contains('active');
+    const users = getUsers();
+
+    if (isPhone) {
+      const name = $('signupPhoneName').value.trim();
+      const phone = $('signupPhone').value.trim();
+      const otp = $('signupPhoneOtp').value.trim();
+      if (!name || name.length < 3) { showE('signupPhoneNameError', 'Name must be at least 3 characters'); return; }
+      if (!/^[6-9]\d{9}$/.test(phone)) { showE('signupPhoneError', 'Enter valid 10-digit number'); return; }
+      if (!otp || otp.length !== 6) { showE('signupPhoneOtpError', 'Enter 6-digit OTP'); return; }
+      if (otp !== generatedOtp) { showE('signupPhoneOtpError', 'Invalid OTP'); return; }
+      if (users.find(u => u.phone === phone)) { showE('signupPhoneError', 'Number already registered. Login instead.'); return; }
+      users.push({ name, phone, email: '', password: '', method: 'phone', createdAt: new Date().toISOString() });
+      saveUsers(users);
+      createSession({ name, phone });
+    } else {
+      const name = $('signupName').value.trim();
+      const email = $('signupEmail').value.trim().toLowerCase();
+      const pass = $('signupPassword').value;
+      const confirm = $('signupConfirm').value;
+      if (!name || name.length < 3) { showE('signupNameError', 'Name must be at least 3 characters'); return; }
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showE('signupEmailError', 'Enter valid email'); return; }
+      if (!pass || pass.length < 6) { showE('signupPasswordError', 'Min 6 characters'); return; }
+      if (pass !== confirm) { showE('signupConfirmError', 'Passwords do not match'); return; }
+      if (users.find(u => u.email === email)) { showE('signupEmailError', 'Email already registered. Login instead.'); return; }
+      users.push({ name, email, password: pass, phone: '', method: 'email', createdAt: new Date().toISOString() });
+      saveUsers(users);
+      createSession({ name, email });
+    }
+
+    showToast('Account created! Redirecting...', 'success');
+    setTimeout(() => window.location.href = 'index.html', 1000);
+  });
+
+  // ===== GOOGLE (Simulation) =====
+  $('btnGoogleLogin').addEventListener('click', () => {
+    const users = getUsers();
+    const gUser = { name: 'Google User', email: 'user@gmail.com', password: '', phone: '', method: 'google', createdAt: new Date().toISOString() };
+    if (!users.find(u => u.email === gUser.email)) { users.push(gUser); saveUsers(users); }
+    createSession(gUser);
+    showToast('Signed in with Google! Redirecting...', 'success');
+    setTimeout(() => window.location.href = 'index.html', 1000);
+  });
+  $('btnGoogleSignup').addEventListener('click', () => $('btnGoogleLogin').click());
+
+})();

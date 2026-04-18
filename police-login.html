@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Police Verification Login — PassportEase" />
+  <title>Police Login — PassportEase</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">🛂</div>
+        <div class="logo-text">Passport<span>Ease</span></div>
+      </a>
+      <div class="header-actions">
+        <button class="btn-icon" id="themeToggle" title="Toggle Dark Mode">🌙</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <main class="auth-page">
+    <div class="auth-card" style="max-width:440px">
+      <div class="auth-admin-badge" style="background:linear-gradient(135deg,rgba(59,130,246,.1),rgba(59,130,246,.05));color:#3b82f6;border-color:rgba(59,130,246,.2)">🛡️ POLICE VERIFICATION PORTAL</div>
+      <div class="auth-form active" style="display:block">
+        <h2 class="auth-title">Police Officer Login</h2>
+        <p class="auth-subtitle">Login to verify passport applications assigned to your city</p>
+
+        <div class="form-group">
+          <label class="form-label" for="policeUser">Officer ID / Username</label>
+          <input type="text" class="form-input" id="policeUser" placeholder="e.g. police_delhi" />
+          <div class="error-message" id="policeUserError"></div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="policePass">Password</label>
+          <input type="password" class="form-input" id="policePass" placeholder="Enter password" />
+          <div class="error-message" id="policePassError"></div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="policeCity">Assigned City</label>
+          <select class="form-select" id="policeCity">
+            <option value="">-- Select Your City --</option>
+            <option>Ahmedabad</option><option>Amritsar</option><option>Bangalore</option><option>Bhopal</option><option>Bhubaneswar</option><option>Chandigarh</option><option>Chennai</option><option>Coimbatore</option><option>Dehradun</option><option>Delhi</option><option>Ghaziabad</option><option>Goa</option><option>Gurgaon</option><option>Guwahati</option><option>Hyderabad</option><option>Indore</option><option>Jaipur</option><option>Jammu</option><option>Kanpur</option><option>Kochi</option><option>Kolkata</option><option>Lucknow</option><option>Ludhiana</option><option>Mumbai</option><option>Nagpur</option><option>Noida</option><option>Patna</option><option>Pune</option><option>Raipur</option><option>Ranchi</option><option>Surat</option><option>Thiruvananthapuram</option><option>Vadodara</option><option>Varanasi</option><option>Visakhapatnam</option>
+          </select>
+          <div class="error-message" id="policeCityError"></div>
+        </div>
+
+        <button class="btn btn-primary auth-submit" id="btnPoliceLogin" style="width:100%;margin-top:12px">🛡️ Login as Police Officer</button>
+
+        <div class="auth-admin-hint" style="background:rgba(59,130,246,.06);border-color:rgba(59,130,246,.15)">
+          <p><strong>Demo Credentials:</strong></p>
+          <p>Username: <code>police</code> &nbsp;|&nbsp; Password: <code>police123</code></p>
+          <p style="margin-top:4px;font-size:11px;color:var(--text-muted)">Select any city to view applications from that PSK</p>
+        </div>
+
+        <p class="auth-footer-text" style="margin-top:20px">
+          <a href="login.html">← Back to User Login</a> &nbsp;|&nbsp; <a href="admin-login.html">Admin Login</a>
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/shared.js"></script>
+  <script>
+    (function () {
+      const $ = id => document.getElementById(id);
+      const LS_SESSION = 'pe_session';
+
+      const session = JSON.parse(localStorage.getItem(LS_SESSION) || 'null');
+      if (session && session.role === 'police') {
+        window.location.href = 'police.html';
+        return;
+      }
+
+      $('btnPoliceLogin').addEventListener('click', () => {
+        const user = $('policeUser').value.trim();
+        const pass = $('policePass').value;
+        const city = $('policeCity').value;
+
+        document.querySelectorAll('.error-message').forEach(e => { e.textContent = ''; e.classList.remove('visible'); });
+
+        if (!user) { $('policeUserError').textContent = 'Officer ID required'; $('policeUserError').classList.add('visible'); return; }
+        if (!pass) { $('policePassError').textContent = 'Password required'; $('policePassError').classList.add('visible'); return; }
+        if (!city) { $('policeCityError').textContent = 'Select your assigned city'; $('policeCityError').classList.add('visible'); return; }
+
+        if (user === 'police' && pass === 'police123') {
+          localStorage.setItem(LS_SESSION, JSON.stringify({
+            role: 'police',
+            name: `Officer ${user.toUpperCase()}`,
+            city: city,
+            loginAt: new Date().toISOString()
+          }));
+          showToast('Police login successful! Redirecting...', 'success');
+          setTimeout(() => window.location.href = 'police.html', 1000);
+        } else {
+          $('policePassError').textContent = 'Invalid credentials';
+          $('policePassError').classList.add('visible');
+        }
+      });
+
+      $('policePass').addEventListener('keydown', e => { if (e.key === 'Enter') $('btnPoliceLogin').click(); });
+    })();
+  </script>
+</body>
+</html>

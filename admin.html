@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Admin Panel — Manage, search, filter, verify documents, approve, or reject passport applications." />
+  <title>Admin Panel — PassportEase</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ACCESSIBILITY TOP BAR -->
+  <div class="accessibility-bar" id="accessibilityBar">
+    <div class="accessibility-bar-inner">
+      <div class="accessibility-left">
+        <span class="accessibility-date" id="accessDate"></span>
+      </div>
+      <div class="accessibility-right">
+        <a href="#mainContent" class="accessibility-link">Skip to Main Content</a>
+        <span class="accessibility-divider"></span>
+        <div class="font-size-controls">
+          <button class="font-size-btn fs-small" data-fontsize="small" title="Decrease Font Size">A-</button>
+          <button class="font-size-btn fs-normal active" data-fontsize="normal" title="Normal Font Size">A</button>
+          <button class="font-size-btn fs-large" data-fontsize="large" title="Increase Font Size">A+</button>
+        </div>
+        <span class="accessibility-divider"></span>
+        <div class="accessibility-call">
+          <span>📞</span> National Call Center <strong style="margin-left:4px;color:#fbbf24">1800-258-1800</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">🛂</div>
+        <div class="logo-text">Passport<span>Ease</span></div>
+      </a>
+      <nav class="nav-links">
+        <a href="admin.html" class="nav-link">🔧 Admin</a>
+      </nav>
+      <div class="header-actions">
+        <div class="user-bar" id="userBar"></div>
+        <button class="btn-icon" id="themeToggle" title="Toggle Dark Mode" aria-label="Toggle theme">🌙</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <main class="main-container fade-in">
+    <div class="page-header">
+      <h1 class="page-title">🔧 Admin Dashboard</h1>
+      <p class="page-subtitle">Verify documents, approve applications, and issue passports</p>
+    </div>
+
+    <!-- Workflow Info Banner -->
+    <div class="workflow-banner">
+      <div class="workflow-banner-title">📋 Application Workflow</div>
+      <div class="workflow-steps-mini">
+        <span class="workflow-step-mini">📄 Submit</span>
+        <span class="workflow-arrow">→</span>
+        <span class="workflow-step-mini active">📋 Doc Verify</span>
+        <span class="workflow-arrow">→</span>
+        <span class="workflow-step-mini">🛡️ Police Verify</span>
+        <span class="workflow-arrow">→</span>
+        <span class="workflow-step-mini active">✅ Admin Approve</span>
+        <span class="workflow-arrow">→</span>
+        <span class="workflow-step-mini">🛂 Print Passport</span>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-grid" id="statsGrid" style="grid-template-columns:repeat(6,1fr)">
+      <div class="stat-card">
+        <div class="stat-icon submitted">📄</div>
+        <div class="stat-info">
+          <div class="stat-value" id="statTotal">0</div>
+          <div class="stat-label">Total</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon submitted">⏳</div>
+        <div class="stat-info">
+          <div class="stat-value" id="statSubmitted">0</div>
+          <div class="stat-label">Pending Docs</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon review">📋</div>
+        <div class="stat-info">
+          <div class="stat-value" id="statDocVerified">0</div>
+          <div class="stat-label">Docs Verified</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="background:rgba(59,130,246,.12);color:#3b82f6">🛡️</div>
+        <div class="stat-info">
+          <div class="stat-value" id="statPoliceVerified">0</div>
+          <div class="stat-label">Police Verified</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon approved">✅</div>
+        <div class="stat-info">
+          <div class="stat-value" id="statApproved">0</div>
+          <div class="stat-label">Approved / Issued</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon rejected">❌</div>
+        <div class="stat-info">
+          <div class="stat-value" id="statRejected">0</div>
+          <div class="stat-label">Rejected</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Management Card -->
+    <div class="section-card">
+      <div class="section-title"><span class="icon">📋</span> Application Management</div>
+      <div class="section-subtitle">Search, filter, and manage all passport applications</div>
+
+      <!-- Toolbar -->
+      <div class="admin-toolbar" style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;">
+        <div style="display:flex; gap:12px; flex-wrap:wrap; flex:1;">
+          <div class="search-box" style="flex:1; min-width:200px;">
+            <span class="search-icon">🔍</span>
+            <input type="text" class="form-input" id="adminSearch" placeholder="Search by Name or Application ID..." />
+          </div>
+          <select class="form-select filter-select" id="adminFilter">
+            <option value="all">All Status</option>
+            <option value="Submitted">Submitted (Pending Doc Verify)</option>
+            <option value="Documents Failed">Docs Failed (Re-upload)</option>
+            <option value="Documents Verified">Docs Verified (At Police)</option>
+            <option value="Police Verified">Police Verified (Needs Approval)</option>
+            <option value="Admin Approved">Admin Approved</option>
+            <option value="Passport Issued">Passport Issued</option>
+            <option value="Rejected">Rejected</option>
+          </select>
+        </div>
+        <button class="btn btn-secondary" id="btnViewUsers" style="white-space:nowrap;">👥 View Registered Users</button>
+      </div>
+
+      <!-- Table -->
+      <div class="data-table-wrapper" id="tableWrapper">
+        <table class="data-table" id="adminTable">
+          <thead>
+            <tr>
+              <th>Application ID</th>
+              <th>Applicant Name</th>
+              <th>Type</th>
+              <th>Mobile</th>
+              <th>Date</th>
+              <th>Docs</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="adminTableBody">
+            <!-- populated by JS -->
+          </tbody>
+        </table>
+      </div>
+
+      <div class="no-data hidden" id="noAdminData">
+        <div class="empty-icon">📂</div>
+        <p>No applications found matching your criteria.</p>
+      </div>
+    </div>
+
+    <!-- Detail Modal -->
+    <div class="admin-detail-overlay hidden" id="detailOverlay">
+      <div class="admin-detail-modal">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+          <h2 style="font-size:20px;font-weight:700;" id="detailModalTitle">📋 Details</h2>
+          <button class="btn btn-secondary btn-sm" id="closeDetailModal">✕ Close</button>
+        </div>
+        <div id="detailContent">
+          <!-- populated by JS -->
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/shared.js"></script>
+  <script src="js/admin.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/chatbot.js"></script>
+</body>
+</html>
