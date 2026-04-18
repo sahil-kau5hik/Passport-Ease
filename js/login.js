@@ -10,7 +10,7 @@
   // If already logged in, redirect
   const session = JSON.parse(localStorage.getItem(LS_SESSION) || 'null');
   if (session && session.role === 'user') {
-    window.location.href = 'index.html';
+    window.location.href = '../index.html';
     return;
   }
 
@@ -120,7 +120,7 @@
     }
 
     showToast('Login successful! Redirecting...', 'success');
-    setTimeout(() => window.location.href = 'index.html', 1000);
+    setTimeout(() => window.location.href = '../index.html', 1000);
   });
 
   // ===== SIGNUP =====
@@ -161,7 +161,7 @@
     }
 
     showToast('Account created! Redirecting...', 'success');
-    setTimeout(() => window.location.href = 'index.html', 1000);
+    setTimeout(() => window.location.href = '../index.html', 1000);
   });
 
   // ===== GOOGLE (Simulation) =====
@@ -175,7 +175,7 @@
     }
     createSession(gUser);
     showToast('Signed in with Google! Redirecting...', 'success');
-    setTimeout(() => window.location.href = 'index.html', 1000);
+    setTimeout(() => window.location.href = '../index.html', 1000);
   });
   $('btnGoogleSignup').addEventListener('click', () => $('btnGoogleLogin').click());
 

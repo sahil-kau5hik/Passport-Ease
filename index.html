@@ -59,9 +59,9 @@
             <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
           <div class="login-dropdown-menu">
-            <a href="login.html" class="login-dropdown-item"><span style="font-size:16px;">👤</span> Citizen</a>
-            <a href="admin-login.html" class="login-dropdown-item"><span style="font-size:16px;">🔧</span> Admin</a>
-            <a href="police-login.html" class="login-dropdown-item"><span style="font-size:16px;">🛡️</span> Police</a>
+            <a href="html/login.html" class="login-dropdown-item"><span style="font-size:16px;">👤</span> Citizen</a>
+            <a href="html/admin-login.html" class="login-dropdown-item"><span style="font-size:16px;">🔧</span> Admin</a>
+            <a href="html/police-login.html" class="login-dropdown-item"><span style="font-size:16px;">🛡️</span> Police</a>
           </div>
         </div>
         <button class="btn-icon" id="themeToggle" title="Toggle Dark Mode" aria-label="Toggle theme">🌙</button>
@@ -89,10 +89,10 @@
         and track your application in real-time — all from one modern portal.
       </p>
       <div class="hero-cta">
-        <a href="apply.html" class="btn btn-hero-primary">
+        <a href="html/apply.html" class="btn btn-hero-primary">
           <span>📝</span> <span data-i18n="hero.cta.apply">Apply for Passport</span>
         </a>
-        <a href="track.html" class="btn btn-hero-secondary">
+        <a href="html/track.html" class="btn btn-hero-secondary">
           <span>📍</span> <span data-i18n="hero.cta.track">Track Application</span>
         </a>
       </div>
@@ -334,9 +334,9 @@
         <div class="footer-links-group">
           <h4 data-i18n="foot.quick">Quick Links</h4>
           <a href="index.html" data-i18n="foot.home">Home</a>
-          <a href="apply.html" data-i18n="foot.apply">Apply for Passport</a>
-          <a href="track.html" data-i18n="foot.track">Track Application</a>
-          <a href="admin.html" data-i18n="foot.admin">Admin Panel</a>
+          <a href="html/apply.html" data-i18n="foot.apply">Apply for Passport</a>
+          <a href="html/track.html" data-i18n="foot.track">Track Application</a>
+          <a href="html/admin.html" data-i18n="foot.admin">Admin Panel</a>
         </div>
         <div class="footer-links-group">
           <h4 data-i18n="foot.resources">Resources</h4>
@@ -376,9 +376,9 @@
           const i = (s.name||'U').charAt(0).toUpperCase();
           ub.innerHTML = `<div class="user-avatar">${i}</div><span>${s.name||'User'}</span><button class="btn btn-secondary btn-sm" onclick="localStorage.removeItem('pe_session');location.reload()" style="padding:6px 12px;font-size:11px">Logout</button>`;
         } else if (s.role === 'admin') {
-          ub.innerHTML = `<a href="admin.html" class="btn btn-secondary btn-sm" style="margin-right:8px;padding:6px 12px;font-size:11px">🔧 Dashboard</a><div class="user-avatar" style="background:linear-gradient(135deg,#ef4444,#dc2626)">A</div><span>Admin</span><button class="btn btn-secondary btn-sm" onclick="localStorage.removeItem('pe_session');location.reload()" style="padding:6px 12px;font-size:11px">Logout</button>`;
+          ub.innerHTML = `<a href="html/admin.html" class="btn btn-secondary btn-sm" style="margin-right:8px;padding:6px 12px;font-size:11px">🔧 Dashboard</a><div class="user-avatar" style="background:linear-gradient(135deg,#ef4444,#dc2626)">A</div><span>Admin</span><button class="btn btn-secondary btn-sm" onclick="localStorage.removeItem('pe_session');location.reload()" style="padding:6px 12px;font-size:11px">Logout</button>`;
         } else if (s.role === 'police') {
-          ub.innerHTML = `<a href="police.html" class="btn btn-secondary btn-sm" style="margin-right:8px;padding:6px 12px;font-size:11px">🛡️ Dashboard</a><div class="user-avatar" style="background:linear-gradient(135deg,#3b82f6,#1d4ed8)">🛡️</div><span>${s.name||'Police'}</span><button class="btn btn-secondary btn-sm" onclick="localStorage.removeItem('pe_session');location.reload()" style="padding:6px 12px;font-size:11px">Logout</button>`;
+          ub.innerHTML = `<a href="html/police.html" class="btn btn-secondary btn-sm" style="margin-right:8px;padding:6px 12px;font-size:11px">🛡️ Dashboard</a><div class="user-avatar" style="background:linear-gradient(135deg,#3b82f6,#1d4ed8)">🛡️</div><span>${s.name||'Police'}</span><button class="btn btn-secondary btn-sm" onclick="localStorage.removeItem('pe_session');location.reload()" style="padding:6px 12px;font-size:11px">Logout</button>`;
         }
       }
     })();
