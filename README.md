@@ -1,130 +1,209 @@
 # 🛂 PassportEase — Online Passport Application Portal
 
-A comprehensive, modern passport application system built with **vanilla HTML, CSS, and JavaScript**. Features a robust 5-step verification pipeline, multi-step form wizard, role-based authentication (User / Admin / Police), AI Chatbot, Internationalization, Accessibility controls, and a complete aesthetic design system.
+[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-000000?style=flat&logo=vercel)](https://passport-ease.vercel.app)
+[![Backend](https://img.shields.io/badge/Backend-Supabase-3ECF8E?style=flat&logo=supabase)](https://supabase.com)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
+A comprehensive, modern passport application system built with **vanilla HTML, CSS, and JavaScript**, backed by **Supabase** for real-time cloud data persistence. Features a 5-step verification pipeline, multi-step form wizard, role-based authentication (User / Admin / Police), AI Chatbot, Internationalization, and a complete design system — deployable on Vercel in one click.
 
 ---
 
-## 🌟 Live Demo Credentials
+## 🌐 Live URLs (after Vercel deployment)
+
+| Page | URL |
+|------|-----|
+| Home | `https://passport-ease.vercel.app/` |
+| Apply | `https://passport-ease.vercel.app/html/apply` |
+| Track | `https://passport-ease.vercel.app/html/track` |
+| Login | `https://passport-ease.vercel.app/html/login` |
+| Admin | `https://passport-ease.vercel.app/html/admin-login` |
+| Police | `https://passport-ease.vercel.app/html/police-login` |
+
+---
+
+## 🌟 Demo Credentials
 
 | Portal | Username | Password | Notes |
 |--------|----------|----------|-------|
-| **User** | Any email | Any password | Create via Sign Up |
-| **Admin** | `admin` | `admin123` | Manages applications & verifies documents |
-| **Police** | `police` | `police123` | Verifies candidates against criminal database |
+| **User** | Any email | Any password | Register via Sign Up |
+| **Admin** | `admin` | `admin123` | Manages applications & documents |
+| **Police** | `police` | `police123` | Select any city at login |
 
 ---
 
 ## 🔄 5-Step Verification Pipeline
 
 ```text
-┌──────────┐    ┌────────────────┐    ┌────────────────────┐    ┌────────────────────┐    ┌────────────────┐
-│ SUBMITTED│───▶│ ADMIN APPROVED │───▶│ DOCUMENTS VERIFIED │───▶│ POLICE VERIFIED    │───▶│ PASSPORT ISSUED│
-└──────────┘    └────────────────┘    └────────────────────┘    └────────────────────┘    └────────────────┘
-     ↓                  ↓                       ↓                        ↓
-  ❌ REJECTED       ❌ REJECTED            ❌ REJECTED             ❌ REJECTED
+[1] Submitted ──▶ [2] Documents Verified ──▶ [3] Police Verified ──▶ [4] Admin Approved ──▶ [5] Passport Issued
+                         │                            │
+                   ❌ Docs Failed              ❌ Rejected
+                  (User re-uploads)
 ```
 
-| Step | Action | Who | Description |
-|------|--------|-----|-------------|
-| 1 | **Submitted** | User | Application submitted after filling 7-step form |
-| 2 | **Admin Approved** | Admin | Admin reviews applicant info and approves |
-| 3 | **Documents Verified** | Admin | Admin verifies all uploaded documents. Specific feedback provided on rejections. |
-| 4 | **Police Verified** | Police | Police checks Aadhaar against criminal database, verifies candidate |
-| 5 | **Passport Issued** | System | Auto-generated passport number (e.g., J1234567) upon police clearance |
+| Step | Status | Actor | Description |
+|------|--------|-------|-------------|
+| 1 | **Submitted** | User | 7-step form submitted with docs & appointment |
+| 2 | **Documents Verified / Failed** | Admin | Granular per-document approve/reject with feedback |
+| 3 | **Police Verified** | Police | Aadhaar criminal DB check + background clearance |
+| 4 | **Admin Approved** | Admin | Final approval gate before issuance |
+| 5 | **Passport Issued** | Admin | Unique passport number auto-generated |
 
 ---
 
-## 📁 Project Structure (18 files)
+## 📁 Project Structure
 
 ```text
-sahil/
-├── index.html           # Landing page with hero, features, stats, fee calculator
-├── login.html           # User Login / Signup (Email, Phone OTP, Google)
-├── login.js             # Authentication logic
-├── admin-login.html     # Admin login portal
-├── police-login.html    # Police officer login with city assignment
-├── apply.html           # 7-step application wizard (Fresh & Renewal)
-├── apply.js             # Wizard logic, validation, drafts, renewal auto-fill
-├── track.html           # Application status tracking & re-upload portal
-├── track.js             # Tracking logic, document re-upload, PDF generation
-├── admin.html           # Admin dashboard (stats, table, management)
-├── admin.js             # Admin logic (granular doc verification, user management)
-├── police.html          # Police verification dashboard
-├── police.js            # Criminal DB check, approve/reject, passport gen
-├── chatbot.js           # AI Support Chatbot logic & UI
-├── i18n.js              # Site-wide internationalization (Multilingual support)
-├── shared.js            # Shared utilities (theme, toast, status mapping)
-├── styles.css           # Complete CSS design system & accessibility styles
-└── README.md            # This file
+Passport-Ease/
+├── index.html                  # Root landing page (hero, features, stats, map, fee calc)
+│
+├── html/                       # All other pages
+│   ├── login.html              # User login & signup (Email / Phone OTP / Google)
+│   ├── admin-login.html        # Admin login portal
+│   ├── admin.html              # Admin dashboard
+│   ├── apply.html              # 7-step application wizard
+│   ├── track.html              # Application tracking & document re-upload
+│   ├── police-login.html       # Police officer login with city assignment
+│   └── police.html            # Police verification dashboard
+│
+├── css/
+│   └── styles.css              # Complete CSS design system (variables, themes, components)
+│
+├── js/
+│   ├── shared.js               # Supabase client, PE.* API, theme, toast, utilities
+│   ├── login.js                # Auth logic (signup/login, OTP simulation, Google)
+│   ├── apply.js                # Wizard, validation, auto-save draft, renewal auto-fill
+│   ├── track.js                # Status tracker, document re-upload, PDF generation
+│   ├── admin.js                # Admin dashboard, granular doc verification, user mgmt
+│   ├── police.js               # Criminal DB simulation, police approve/reject
+│   ├── chatbot.js              # AI support chatbot UI & logic
+│   └── i18n.js                 # Site-wide multilingual translation framework
+│
+├── assets/
+│   └── india_map.png           # India administrative map (PSK location visual)
+│
+├── vercel.json                 # Vercel routing, clean URLs, security headers, caching
+├── robots.txt                  # SEO: allow crawlers, block admin/police portals
+├── sitemap.xml                 # XML sitemap for search engines
+├── .gitignore
+└── README.md
+```
+
+---
+
+## 🗄️ Supabase Database Schema
+
+> Run `supabase_setup.sql` in **Supabase Dashboard → SQL Editor → New Query**
+
+| Table | Purpose |
+|-------|---------|
+| `pe_store` | Key-value store: theme, booked slots, ID counter, drafts |
+| `pe_applications` | All passport applications (indexed by status, city, user) |
+| `pe_users` | Registered citizen accounts |
+| `pe_complaints` | Helpdesk feedback & complaints |
+
+All tables have **Row Level Security (RLS)** enabled with public anon policies for demo use.
+
+### Supabase Configuration (`js/shared.js`)
+```js
+const SUPABASE_URL     = 'https://ycpivhefrggsjrpdmfxe.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_KGS_gOQ8gYLeAOnE97J0fw_hnRtrNwR';
 ```
 
 ---
 
 ## 🎯 Features
 
-### User Portal & Core Experience
-- **7-Step Application Wizard**: Application Type (Fresh/Renewal) → Personal → Family → Contact → Documents → Appointment → Review
-- **Passport Renewal**: Users can auto-fill data based on previous/existing applications.
-- **6 Document Uploads**: Photo, Aadhaar, PAN, DOB Proof, Address Proof, Signature.
-- **Watermarked Security**: Applies a semi-transparent world map overlay to all uploaded documents for enhanced security and branding.
-- **Granular Re-uploading**: Seamless UI for re-uploading individual documents if rejected by the Admin, avoiding full restarts.
-- **Appointment Booking**: Date picker + 16 time slots (9 AM – 5 PM) with collision prevention.
-- **Fee Calculator Widget**: Floating component to compute estimated passport fees dynamically based on type, pages, and scheme (Tatkaal/Normal).
-- **AI Support Chatbot**: Integrated artificial intelligence assistant to guide users across the portal.
-- **Multilingual Support**: Switch seamlessly between languages natively using the integrated `i18n.js` framework.
-- **Accessibility Controls**: Top bar with functional, site-wide font-size adjustments (`A-`, `A`, `A+`) and high accessibility features.
-- **Helpdesk System**: Real-time user feedback and complaint submission modal.
+### 👤 User Portal
+- **7-Step Application Wizard** — Application Type → Personal → Family → Contact → Documents → Appointment → Review
+- **Passport Renewal** — Auto-fills form from existing application data
+- **6 Document Uploads** — Photo, Aadhaar, PAN, DOB Proof, Address Proof, Signature (max 2MB, Base64 preview)
+- **Watermarked Security** — Semi-transparent world map overlay on all uploaded documents
+- **Document Re-upload** — Re-upload only rejected documents individually without restarting
+- **Appointment Booking** — 16 daily slots (9 AM – 5 PM) with anti-collision slot locking
+- **Fee Calculator** — Floating widget for dynamic fee calculation (type × pages × scheme)
+- **AI Chatbot** — Integrated assistant to guide users across the portal (24/7)
+- **Multilingual** — Site-wide language switching via `i18n.js`
+- **Accessibility Bar** — Font-size controls (A− / A / A+), skip to content, screen reader link
 
-### Admin Portal
-- **Dashboard Stats**: Real-time total, submitted, verified, and rejected counts.
-- **Granular Document Verification**: Reject individual documents (e.g., blurry photo) with precise localized feedback while approving the rest.
-- **User & Helpdesk Management**: Native section to oversee system users and process helpdesk tracker records.
-- **Detail View**: Complete applicant information modal with robust UI parsing.
+### 🔧 Admin Portal
+- **Live Dashboard Stats** — Submitted / Verified / Rejected / Issued counts
+- **Granular Doc Verification** — Approve/reject each document individually with failure reasons
+- **User Management** — View all registered citizen accounts
+- **Helpdesk Manager** — View all submitted complaints & feedback
 
-### Police Portal
-- **City-Based Assignment**: Police officer logs in with assigned city, only sees apps from that specific PSK.
-- **Criminal Database Check**: Simulated Aadhaar lookup against criminal records.
-  - Flagged Aadhaar numbers: `1111 1111 1111`, `2222 2222 2222`, `3333 3333 3333`, `9999 9999 9999`
-- **Verification Modal**: Full applicant details + criminal check result + document preview.
-- **Passport Issuance**: Auto-generates unique passport number upon clearance.
+### 🛡️ Police Portal
+- **City-Based Filtering** — Officer only sees applications from their assigned PSK city
+- **Criminal DB Simulation** — Aadhaar lookup against flagged records
+  - Flagged: `1111 1111 1111` · `2222 2222 2222` · `3333 3333 3333` · `9999 9999 9999`
+- **Verification Modal** — Full applicant details + criminal check result + doc preview
 
-### Authentication & System
-- **Role-Based Auth**: Protected routes for User, Admin, and Police levels.
-- **Session Management**: `pe_session` in localStorage with role-based routing.
-- **Dark/Light Mode**: Persistent theme toggle.
-- **Glassmorphism UI**: High aesthetic, modern, and vibrant design with cohesive interactions and micro-animations.
+### ⚙️ System
+- **Supabase Backend** — Real-time cloud persistence with graceful localStorage fallback
+- **Role-Based Auth** — `pe_session` in localStorage; protected pages redirect unauthorised users
+- **Dark / Light Mode** — Persistent theme, saved to Supabase `pe_store`
+- **Glassmorphism UI** — Premium design with gradients, micro-animations, and vibrant palette
 
 ---
 
-## 🗄️ localStorage Data Models
+## 🚀 Deploy on Vercel
 
-| Key | Purpose |
-|-----|---------|
-| `pe_theme` | Light/Dark mode preference |
-| `pe_session` | Current user session (role, name, city) |
-| `pe_draft` | Auto-saved form data |
-| `pe_draft_docs` | Auto-saved document Base64 data |
-| `pe_applications` | All submitted applications |
-| `pe_booked_slots` | Booked appointment slots by date |
-| `pe_id_counter` | Sequential application ID counter |
-| `pe_users` | Registered user accounts |
-| `pe_complaints` | Recorded helpdesk feedback/complaints |
+1. Push this repo to GitHub (already done ✅)
+2. Go to [vercel.com](https://vercel.com) → **New Project** → Import `sahil-kau5hik/Passport-Ease`
+3. Framework: **Other** — no build command needed
+4. Click **Deploy**
 
----
-
-## 🚀 Getting Started
-
-1. Open `index.html` in any modern browser, or serve with:
-   ```bash
-   npx serve .
-   ```
-
-2. **User Flow**: Login (or create account) → Select Language / Use Chatbot / Calculate Fee → Apply (Fresh/Renewal) → Track & Re-upload (if needed)
-
-3. **Admin Flow**: Admin Login → Approve Applications → Verify Docs (Granular) → Manage Users & Helpdesk
-
-4. **Police Flow**: Police Login (select city) → Verify Backgrounds → Issue Passport
+Clean URL redirects are pre-configured in `vercel.json`:
+```
+/login        → /html/login
+/apply        → /html/apply
+/track        → /html/track
+/admin        → /html/admin
+/police       → /html/police
+```
 
 ---
 
-*Built with ❤️ — Vanilla HTML, CSS, JavaScript. No frameworks. No dependencies.*
+## 🗃️ Local Development
+
+```bash
+# Clone the repo
+git clone https://github.com/sahil-kau5hik/Passport-Ease.git
+cd Passport-Ease
+
+# Serve locally (no build step needed)
+npx serve .
+# or
+npx live-server .
+```
+
+Then open `http://localhost:3000` in your browser.
+
+---
+
+## 📊 Data Flow
+
+```
+User Action (Browser)
+      │
+      ▼
+shared.js (PE.saveApplication / PE.saveUser / PE.saveComplaint)
+      │
+      ├──▶ Supabase REST API (pe_applications / pe_users / pe_complaints)
+      │         └── Real-time cloud storage ✅
+      │
+      └──▶ localStorage (fallback if Supabase unreachable)
+                  └── Graceful degradation ✅
+```
+
+---
+
+## 🔒 Security Notes
+
+- The `SUPABASE_ANON_KEY` used here is a **publishable key** — safe to expose in frontend code
+- Admin/Police portals are blocked from search engine indexing via `robots.txt`
+- In production, replace plain-text passwords with **Supabase Auth** (magic links / OTP)
+- RLS policies currently allow all anon access — tighten per-user in production
+
+---
+
+*Built with ❤️ — Vanilla HTML, CSS, JavaScript. Backend: Supabase. Hosting: Vercel. No frameworks. No npm.*
