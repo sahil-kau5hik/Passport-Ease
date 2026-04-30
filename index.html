@@ -6,12 +6,19 @@
   <meta name="description" content="PassportEase — Your modern online passport application portal. Apply, track, and manage passport applications seamlessly." />
   <meta name="robots" content="index, follow" />
   <meta property="og:title" content="PassportEase — Online Passport Application Portal" />
-  <meta property="og:description" content="Apply for your passport online, upload documents securely, book appointment slots, and track your application in real-time." />
+  <meta property="og:description" content="Apply for your passport online, upload documents securely, and track your application in real-time." />
   <meta property="og:type" content="website" />
   <title>PassportEase — Online Passport Application Portal</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%236c63ff'/><text x='50' y='54' font-size='60' text-anchor='middle' dominant-baseline='middle'>🛂</text></svg>" />
+  <link rel="shortcut icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%236c63ff'/><text x='50' y='54' font-size='60' text-anchor='middle' dominant-baseline='middle'>🛂</text></svg>" />
+  <!-- Resource Hints: connect early to external services -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://ycpivhefrggsjrpdmfxe.supabase.co" crossorigin />
+  <link rel="dns-prefetch" href="https://ycpivhefrggsjrpdmfxe.supabase.co" />
+  <!-- Non-blocking Google Fonts (print trick avoids render-blocking) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" /></noscript>
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
@@ -20,6 +27,20 @@
   <div class="accessibility-bar" id="accessibilityBar">
     <div class="accessibility-bar-inner">
       <div class="accessibility-left">
+        <!-- Government Logos -->
+        <div class="gov-logos">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Emblem_of_India.svg/60px-Emblem_of_India.svg.png"
+            alt="Government of India Emblem"
+            class="gov-logo-emblem"
+            title="Government of India"
+          />
+          <div class="gov-logo-divider"></div>
+          <div class="gov-logo-digital" title="Digital India">
+            <span class="di-digital">Digital</span><span class="di-india">India</span><span class="di-wave">~</span>
+          </div>
+        </div>
+        <span class="gov-logo-bar-sep"></span>
         <span class="accessibility-date" id="accessDate"></span>
       </div>
       <div class="accessibility-right">
@@ -85,8 +106,8 @@
         <span class="hero-gradient-text" data-i18n="hero.title2">Simplified &amp; Digitized.</span>
       </h1>
       <p class="hero-description" data-i18n="hero.desc">
-        Apply for your passport online, upload documents securely, book appointment slots,
-        and track your application in real-time — all from one modern portal.
+        Apply for your passport online, upload documents securely, and track your
+        application in real-time — all from one modern portal.
       </p>
       <div class="hero-cta">
         <a href="html/apply.html" class="btn btn-hero-primary">
@@ -194,7 +215,7 @@
           <div class="step-number">01</div>
           <div class="step-icon-wrap"><span>📝</span></div>
           <h3>Submit Application</h3>
-          <p>Fill out your details, upload documents, book an appointment slot, and submit your application online.</p>
+          <p>Fill out your details, upload documents, and submit your application online.</p>
         </div>
         <div class="step-connector">
           <svg width="48" height="20" viewBox="0 0 48 20"><path d="M0 10 H40 L36 5 M40 10 L36 15" stroke="var(--accent)" fill="none" stroke-width="2" stroke-linecap="round"/></svg>
@@ -352,13 +373,26 @@
           <a href="#" data-i18n="foot.disclaimer">Disclaimer</a>
           <a href="#" data-i18n="foot.accessibility">Accessibility</a>
         </div>
+        <div class="footer-links-group footer-contact-group">
+          <h4>Contact Us</h4>
+          <div class="footer-contact-item">
+            <span class="footer-contact-icon">📍</span>
+            <span>Sonipat, Haryana, India</span>
+          </div>
+          <div class="footer-contact-item">
+            <span class="footer-contact-icon">📧</span>
+            <a href="mailto:kaushik93503@gmail.com" style="color:inherit;word-break:break-all;">kaushik93503@gmail.com</a>
+          </div>
+          <div class="footer-contact-item">
+            <span class="footer-contact-icon">📞</span>
+            <a href="tel:+918607372833" style="color:inherit;">+91 86073 72833</a>
+          </div>
+        </div>
       </div>
       <div class="footer-bottom">
         <p data-i18n="foot.copy">&copy; 2026 PassportEase. All rights reserved. For demonstration purposes only.</p>
-        <div class="footer-socials">
-          <a href="#" class="footer-social-link" title="Twitter">🐦</a>
-          <a href="#" class="footer-social-link" title="GitHub">💻</a>
-          <a href="#" class="footer-social-link" title="Email">📧</a>
+        <div class="footer-scroll-top">
+          <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" class="scroll-top-btn" title="Back to top">↑</a>
         </div>
       </div>
     </div>
@@ -472,7 +506,6 @@
         openFeeBtn.addEventListener('click', () => feeOverlay.classList.add('active'));
         closeFeeBtn.addEventListener('click', (e) => { e.preventDefault(); feeOverlay.classList.remove('active'); feeResult.classList.add('hidden'); });
         feeOverlay.addEventListener('click', (e) => { if(e.target === feeOverlay) { feeOverlay.classList.remove('active'); feeResult.classList.add('hidden'); } });
-        feeForm.addEventListener('change', calculateFee);
         feeForm.addEventListener('submit', (e) => { e.preventDefault(); calculateFee(); });
         function calculateFee() {
           const type = document.getElementById('fcType').value;
@@ -551,8 +584,8 @@
             <option value="Tatkaal">Tatkaal (Expedited)</option>
           </select>
         </div>
-        <div id="feeResult" class="hidden" style="background:rgba(34,197,94,.1); border:1px solid rgba(34,197,94,.3); border-radius:var(--radius-sm); padding:16px; margin-bottom:20px; text-align:center;"></div>
         <button type="button" onclick="document.getElementById('feeCalcForm').dispatchEvent(new Event('submit'))" class="btn btn-primary" style="width:100%; justify-content:center; padding:12px; font-size:14px;">Calculate Total Fee</button>
+        <div id="feeResult" class="hidden" style="background:rgba(34,197,94,.1); border:1px solid rgba(34,197,94,.3); border-radius:var(--radius-sm); padding:16px; margin-top:16px; text-align:center;"></div>
       </form>
     </div>
   </div>

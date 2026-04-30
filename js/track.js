@@ -141,7 +141,7 @@
             <div style="font-size:18px;font-weight:700;">${app.fullName}${renewalBadge}</div>
             <div style="font-size:13px;color:var(--text-muted);margin-top:2px;">
               ${app.applicationType || 'Fresh'} · ${app.passportType || 'Ordinary'} · PSK: ${app.pskCity || '-'}<br/>
-              Submitted on ${app.dateFormatted} · Appointment: ${app.appointmentDate} at ${app.appointmentSlot}
+              Submitted on ${app.dateFormatted}
             </div>
           </div>
           <div style="display:flex;align-items:center;gap:12px;">

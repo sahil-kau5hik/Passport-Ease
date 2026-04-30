@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Apply for a new passport — fill in your personal details, upload required documents, and book an appointment slot." />
   <title>Apply — PassportEase</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%236c63ff'/><text y='0.9em' font-size='72' text-anchor='middle' x='50' dominant-baseline='hanging'>&#x1F6C2;</text></svg>" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -62,7 +63,7 @@
     </div>
 
     <!-- STEP COUNTER -->
-    <div class="wizard-step-counter" id="stepCounter">Step <strong>1</strong> of <strong>7</strong></div>
+    <div class="wizard-step-counter" id="stepCounter">Step <strong>1</strong> of <strong>6</strong></div>
 
     <!-- STEP WIZARD -->
     <div class="step-wizard" id="stepWizard">
@@ -88,10 +89,6 @@
       </div>
       <div class="wizard-step" data-step="6">
         <div class="wizard-step-circle">6</div>
-        <div class="wizard-step-label">Appointment</div>
-      </div>
-      <div class="wizard-step" data-step="7">
-        <div class="wizard-step-circle">7</div>
         <div class="wizard-step-label">Review & Submit</div>
       </div>
     </div>
@@ -519,36 +516,12 @@
             </div>
 
           </div>
-          <div class="step-nav"><button type="button" class="btn btn-secondary step-prev" data-to="4">← Back</button><button type="button" class="btn btn-primary step-next" data-to="6">Next: Appointment →</button></div>
+          <div class="step-nav"><button type="button" class="btn btn-secondary step-prev" data-to="4">← Back</button><button type="button" class="btn btn-primary step-next" data-to="6">Next: Review & Submit →</button></div>
         </div>
       </div>
 
-      <!-- ========== STEP 6: APPOINTMENT ========== -->
+      <!-- ========== STEP 6: REVIEW & SUBMIT ========== -->
       <div class="step-content" id="step6">
-        <div class="section-card">
-          <div class="section-title"><span class="icon">📅</span> Appointment Booking</div>
-          <div class="section-subtitle">Select a date and available time slot for your visit to the Passport Seva Kendra</div>
-          <div class="form-grid">
-            <div class="form-group">
-              <label class="form-label" for="appointmentDate">Preferred Date <span class="required">*</span></label>
-              <input type="date" class="form-input" id="appointmentDate" name="appointmentDate" />
-              <div class="error-message" id="appointmentDateError"></div>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Selected Slot</label>
-              <input type="text" class="form-input" id="selectedSlotDisplay" readonly placeholder="Select a time slot below" />
-            </div>
-          </div>
-          <div class="slots-grid" id="slotsGrid">
-            <p style="color:var(--text-muted);font-size:14px;">Select a date to see available slots.</p>
-          </div>
-          <div class="error-message" id="slotError" style="margin-top:12px"></div>
-          <div class="step-nav"><button type="button" class="btn btn-secondary step-prev" data-to="5">← Back</button><button type="button" class="btn btn-primary step-next" data-to="7">Next: Review & Submit →</button></div>
-        </div>
-      </div>
-
-      <!-- ========== STEP 7: REVIEW & SUBMIT ========== -->
-      <div class="step-content" id="step7">
         <div class="section-card">
           <div class="section-title"><span class="icon">📜</span> Review Your Application</div>
           <div class="section-subtitle">Please review all details before submitting. You can go back to edit any step.</div>
@@ -567,7 +540,7 @@
           </div>
 
           <div class="step-nav">
-            <button type="button" class="btn btn-secondary step-prev" data-to="6">← Back</button>
+            <button type="button" class="btn btn-secondary step-prev" data-to="5">← Back</button>
             <button type="submit" class="btn btn-primary" id="btnSubmit" disabled>🚀 Submit Application</button>
           </div>
         </div>

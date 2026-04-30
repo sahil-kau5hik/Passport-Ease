@@ -9,16 +9,8 @@
   const MAX_FILE_SIZE = 2 * 1024 * 1024;
   const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
   const DEBOUNCE_DELAY = 500;
-  const TOTAL_STEPS = 7;
+  const TOTAL_STEPS = 6;
   const LS_SESSION = 'pe_session';
-
-  const TIME_SLOTS = [];
-  for (let h = 9; h < 17; h++) {
-    for (let m = 0; m < 60; m += 30) {
-      const h12 = h > 12 ? h - 12 : h === 0 ? 12 : h;
-      TIME_SLOTS.push(`${h12}:${m === 0 ? '00' : '30'} ${h >= 12 ? 'PM' : 'AM'}`);
-    }
-  }
 
   const REQUIRED_DOCS = ['passportPhoto', 'aadhaarCard', 'birthCertificate', 'addressProof', 'signature'];
   const ALL_DOCS = ['passportPhoto', 'aadhaarCard', 'panCard', 'birthCertificate', 'addressProof', 'signature'];
@@ -57,8 +49,7 @@
     3: ['fatherName', 'motherName'],
     4: ['mobile', 'email', 'aadhaarNumber', 'presentAddress', 'presentCity', 'presentState', 'presentPincode', 'pskCity', 'emergencyName', 'emergencyPhone', 'emergencyRelation'],
     5: [],  // docs
-    6: [],  // appointment
-    7: [],  // review
+    6: [],  // review
   };
 
   const ALL_TEXT_FIELDS = Object.values(STEP_FIELDS).flat();
@@ -107,8 +98,8 @@
     // Update counter
     $('stepCounter').innerHTML = `Step <strong>${step}</strong> of <strong>${TOTAL_STEPS}</strong>`;
 
-    // If step 7, render review
-    if (step === 7) renderReview();
+    // If step 6, render review
+    if (step === 6) renderReview();
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
@@ -141,11 +132,6 @@
         }
       });
     }
-    // Step 6: appointment
-    if (step === 6) {
-      if (!$('appointmentDate').value) { showErr($('appointmentDateError'), 'Select a date.'); ok = false; }
-      if (!draft.selectedSlot) { showErr($('slotError'), 'Select a time slot.'); ok = false; }
-    }
     return ok;
   }
 
@@ -155,8 +141,6 @@
     OPTIONAL_FIELDS.forEach(f => { draft[f] = $(f) ? $(f).value : ''; });
     // Collect renewal fields
     RENEWAL_FIELDS.forEach(f => { draft[f] = $(f) ? $(f).value : ''; });
-    draft.appointmentDate = $('appointmentDate').value;
-    draft.selectedSlot = draft.selectedSlot || '';
     draft.declaration = $('declaration').checked;
     draft.currentStep = currentStep;
   }
@@ -189,7 +173,7 @@
           draft.oldPassportExpiryDate = new Date(issue.setFullYear(issue.getFullYear() + 10)).toISOString().split('T')[0];
         }
         draft.renewalReason = 'Validity Expired within 3 years/Due to Expire';
-        delete draft.id; delete draft.status; delete draft.docs; delete draft.docStatus; delete draft.dateFormatted; delete draft.appointmentDate; delete draft.appointmentSlot; delete draft.selectedSlot; delete draft.currentStep; delete draft.declaration;
+        delete draft.id; delete draft.status; delete draft.docs; delete draft.docStatus; delete draft.dateFormatted; delete draft.currentStep; delete draft.declaration;
         
         localStorage.removeItem('pe_renew_id');
         showToast('Form pre-filled with data from previous Passport.', 'info');
@@ -205,8 +189,6 @@
     OPTIONAL_FIELDS.forEach(f => { if ($(f) && draft[f]) $(f).value = draft[f]; });
     RENEWAL_FIELDS.forEach(f => { if ($(f) && draft[f]) $(f).value = draft[f]; });
     toggleRenewalFields();
-    if (draft.appointmentDate) { $('appointmentDate').value = draft.appointmentDate; renderSlots(); }
-    if (draft.selectedSlot) $('selectedSlotDisplay').value = draft.selectedSlot;
     if (draft.declaration) $('declaration').checked = true;
     if (draft.currentStep && draft.currentStep > 1) goToStep(draft.currentStep);
     
@@ -221,8 +203,6 @@
     localStorage.removeItem(LS_KEYS.DRAFT);
     localStorage.removeItem(LS_KEYS.DRAFT + '_docs');
     $('passportForm').reset();
-    $('selectedSlotDisplay').value = '';
-    $('slotsGrid').innerHTML = '<p style="color:var(--text-muted);font-size:14px;">Select a date to see available slots.</p>';
     ALL_DOCS.forEach(key => clearDocUpload(key));
     clearAllErrors();
     toggleRenewalFields();
@@ -301,30 +281,6 @@
     $(`status_${key}`).innerHTML = `<span class="doc-status-text ${cls[state] || 'not-uploaded'}">${text}</span>`;
   }
 
-  // ===== SLOTS =====
-  function renderSlots() {
-    const date = $('appointmentDate').value;
-    if (!date) { $('slotsGrid').innerHTML = '<p style="color:var(--text-muted);font-size:14px;">Select a date to see available slots.</p>'; return; }
-    const booked = (lsGet(LS_KEYS.BOOKED_SLOTS, {})[date]) || [];
-    $('slotsGrid').innerHTML = '';
-    TIME_SLOTS.forEach(slot => {
-      const btn = document.createElement('button'); btn.type = 'button'; btn.className = 'slot-btn'; btn.textContent = slot;
-      if (booked.includes(slot)) { btn.classList.add('booked'); btn.disabled = true; }
-      else btn.addEventListener('click', () => selectSlot(slot, btn));
-      if (draft.selectedSlot === slot && draft.appointmentDate === date && !booked.includes(slot)) btn.classList.add('selected');
-      $('slotsGrid').appendChild(btn);
-    });
-  }
-
-  function selectSlot(slot, btn) {
-    const prev = $('slotsGrid').querySelector('.slot-btn.selected');
-    if (prev) prev.classList.remove('selected');
-    btn.classList.add('selected');
-    draft.selectedSlot = slot;
-    $('selectedSlotDisplay').value = slot;
-    clearErr($('slotError')); debounceSave();
-  }
-
   // ===== VALIDATION =====
   const rules = {
     applicationType: v => !v ? 'Select application type.' : '',
@@ -400,7 +356,6 @@
       RENEWAL_FIELDS.forEach(f => { if (!validateField(f, $(f) ? $(f).value : '', true)) ok = false; });
     }
     REQUIRED_DOCS.forEach(k => { if (!docs[k]) ok = false; });
-    if (!$('appointmentDate').value || !draft.selectedSlot) ok = false;
     if (!$('declaration').checked) ok = false;
     $('btnSubmit').disabled = !ok;
     return ok;
@@ -452,7 +407,6 @@
         <div class="detail-item"><span class="detail-label">Aadhaar</span><span class="detail-value">${draft.aadhaarNumber || '-'}</span></div>
         <div class="detail-item" style="grid-column:1/-1"><span class="detail-label">Address</span><span class="detail-value">${draft.presentAddress || '-'}, ${draft.presentCity || ''}, ${draft.presentState || ''} — ${draft.presentPincode || ''}</span></div>
         <div class="detail-item"><span class="detail-label">PSK City</span><span class="detail-value">${draft.pskCity || '-'}</span></div>
-        <div class="detail-item"><span class="detail-label">Appointment</span><span class="detail-value">${draft.appointmentDate || '-'} at ${draft.selectedSlot || '-'}</span></div>
         <div class="detail-item"><span class="detail-label">Emergency</span><span class="detail-value">${draft.emergencyName || '-'} (${draft.emergencyRelation || '-'}) — ${draft.emergencyPhone || '-'}</span></div>
       </div>
       ${renewalHtml}
@@ -488,7 +442,6 @@
       pskCity: draft.pskCity, policeStation: draft.policeStation || '',
       emergencyName: draft.emergencyName, emergencyPhone: draft.emergencyPhone, emergencyRelation: draft.emergencyRelation,
       docs: { ...docs },
-      appointmentDate: draft.appointmentDate, appointmentSlot: draft.selectedSlot,
       status: 'Submitted',
       submittedAt: now.toISOString(),
       dateFormatted: now.toLocaleDateString('en-IN', { day:'2-digit', month:'short', year:'numeric' }),
@@ -511,12 +464,6 @@
     // Persist to Supabase pe_applications table
     PE.saveApplication(app);
 
-    // Record booked slot in KV store
-    const slots = lsGet(LS_KEYS.BOOKED_SLOTS, {});
-    if (!slots[app.appointmentDate]) slots[app.appointmentDate] = [];
-    slots[app.appointmentDate].push(app.appointmentSlot);
-    lsSet(LS_KEYS.BOOKED_SLOTS, slots);
-
     // Clear draft
     localStorage.removeItem(LS_KEYS.DRAFT);
     localStorage.removeItem(LS_KEYS.DRAFT + '_docs');
@@ -526,10 +473,6 @@
 
   // ===== INIT =====
   function init() {
-    // Min date
-    const d = new Date(); d.setDate(d.getDate() + 1);
-    $('appointmentDate').min = d.toISOString().split('T')[0];
-
     initDocUploads();
     loadDraft();
 
@@ -575,11 +518,6 @@
         if (rules[f]) validateField(f, el.value, false);
         if (optionalRules[f]) validateOptionalField(f, el.value, false);
       });
-    });
-
-    $('appointmentDate').addEventListener('change', () => {
-      draft.selectedSlot = ''; $('selectedSlotDisplay').value = '';
-      debounceSave(); renderSlots();
     });
 
     $('declaration').addEventListener('change', () => { debounceSave(); validateAllForSubmit(); });
