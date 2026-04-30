@@ -12,14 +12,14 @@
 ## ✨ Premium Features
 
 ### 🏢 Multi-Portal Ecosystem
-*   **Citizen Portal:** 7-step smart application wizard with renewal auto-fill, document preview, and real-time tracking.
+*   **Citizen Portal:** 6-step smart application wizard with renewal auto-fill, document preview, and real-time tracking.
 *   **Admin Dashboard:** Comprehensive oversight with granular document verification, user management, and helpdesk tracking.
 *   **Police Portal:** Secure city-based verification system with integrated Aadhaar-based criminal database lookup.
 
 ### 🛡️ Secure Engineering
 *   **Watermarked Security:** Automatic semi-transparent world map overlay on all citizen-uploaded sensitive documents.
 *   **Real-time Persistence:** Powered by **Supabase REST API** with a dedicated `pe_store` for configuration and `pe_applications` for data.
-*   **Anti-Collision Logic:** Intelligent appointment scheduling with real-time slot locking to prevent double bookings.
+*   **Fully Online:** Optimized digital workflow with no physical appointment required as of April 2026.
 
 ### 🎨 State-of-the-Art UX
 *   **Glassmorphism UI:** Modern design system with vibrant gradients, frosted-glass effects, and micro-animations.
@@ -56,7 +56,7 @@ graph LR
     style A fill:#3b82f6,stroke:#fff,color:#fff
 ```
 
-1.  **Submission:** Citizen completes the 7-step wizard and hooks an appointment.
+1.  **Submission:** Citizen completes the 6-step wizard (fully online).
 2.  **Document Verification:** Admin reviews each document. Rejected documents can be re-uploaded individually.
 3.  **Police Verification:** Officers verify criminal records based on city assignment.
 4.  **Admin Approval:** The final seal of approval after all background checks.

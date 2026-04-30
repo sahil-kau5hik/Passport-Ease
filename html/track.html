@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
@@ -17,21 +17,26 @@
   <div class="accessibility-bar" id="accessibilityBar">
     <div class="accessibility-bar-inner">
       <div class="accessibility-left">
+        <div class="gov-logos">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Emblem_of_India.svg/60px-Emblem_of_India.svg.png" alt="Gov" class="gov-logo-emblem">
+          <div class="gov-logo-divider"></div>
+          <div class="gov-logo-digital">
+            <span class="di-digital" style="color:#fff">Digital</span><span class="di-india" style="color:#ff9933">India</span>
+          </div>
+        </div>
         <span class="accessibility-date" id="accessDate"></span>
       </div>
       <div class="accessibility-right">
-        <a href="#mainContent" class="accessibility-link">Skip to Main Content</a>
-        <span class="accessibility-divider"></span>
-        <a href="#" class="accessibility-link">Screen Reader Access</a>
+        <a href="#mainContent" class="accessibility-link">Skip to Content</a>
         <span class="accessibility-divider"></span>
         <div class="font-size-controls">
-          <button class="font-size-btn fs-small" data-fontsize="small" title="Decrease Font Size">A-</button>
-          <button class="font-size-btn fs-normal active" data-fontsize="normal" title="Normal Font Size">A</button>
-          <button class="font-size-btn fs-large" data-fontsize="large" title="Increase Font Size">A+</button>
+          <button class="font-size-btn fs-small" data-fontsize="small">A-</button>
+          <button class="font-size-btn fs-normal active" data-fontsize="normal">A</button>
+          <button class="font-size-btn fs-large" data-fontsize="large">A+</button>
         </div>
         <span class="accessibility-divider"></span>
         <div class="accessibility-call">
-          <span>📞</span> National Call Center <strong style="margin-left:4px;color:#fbbf24">1800-258-1800</strong>
+          <span>📞</span> Call Center <strong>1800-258-1800</strong>
         </div>
       </div>
     </div>
@@ -45,10 +50,13 @@
         <div class="logo-text">Passport<span>Ease</span></div>
       </a>
       <nav class="nav-links">
-        <a href="admin.html" class="nav-link">🔧 Admin</a>
+        <a href="../index.html" class="nav-link">🏠 Home</a>
+        <a href="apply.html" class="nav-link">📝 Apply</a>
+        <a href="track.html" class="nav-link active">📍 Track</a>
       </nav>
       <div class="header-actions">
-        <button class="btn-icon" id="themeToggle" title="Toggle Dark Mode" aria-label="Toggle theme">🌙</button>
+        <div id="userBar"></div>
+        <button class="btn-icon" id="themeToggle" title="Toggle Dark Mode">🌙</button>
       </div>
     </div>
   </header>

@@ -1,26 +1,35 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="PassportEase — Your modern online passport application portal. Apply, track, and manage passport applications seamlessly." />
+  <meta name="description"
+    content="PassportEase — Your modern online passport application portal. Apply, track, and manage passport applications seamlessly." />
   <meta name="robots" content="index, follow" />
   <meta property="og:title" content="PassportEase — Online Passport Application Portal" />
-  <meta property="og:description" content="Apply for your passport online, upload documents securely, and track your application in real-time." />
+  <meta property="og:description"
+    content="Apply for your passport online, upload documents securely, and track your application in real-time." />
   <meta property="og:type" content="website" />
   <title>PassportEase — Online Passport Application Portal</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%236c63ff'/><text x='50' y='54' font-size='60' text-anchor='middle' dominant-baseline='middle'>🛂</text></svg>" />
-  <link rel="shortcut icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%236c63ff'/><text x='50' y='54' font-size='60' text-anchor='middle' dominant-baseline='middle'>🛂</text></svg>" />
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%236c63ff'/><text x='50' y='54' font-size='60' text-anchor='middle' dominant-baseline='middle'>🛂</text></svg>" />
+  <link rel="shortcut icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%236c63ff'/><text x='50' y='54' font-size='60' text-anchor='middle' dominant-baseline='middle'>🛂</text></svg>" />
   <!-- Resource Hints: connect early to external services -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preconnect" href="https://ycpivhefrggsjrpdmfxe.supabase.co" crossorigin />
   <link rel="dns-prefetch" href="https://ycpivhefrggsjrpdmfxe.supabase.co" />
   <!-- Non-blocking Google Fonts (print trick avoids render-blocking) -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-  <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" /></noscript>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet"
+    media="print" onload="this.media='all'" />
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  </noscript>
   <link rel="stylesheet" href="css/styles.css" />
 </head>
+
 <body>
 
   <!-- ACCESSIBILITY TOP BAR -->
@@ -31,10 +40,7 @@
         <div class="gov-logos">
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Emblem_of_India.svg/60px-Emblem_of_India.svg.png"
-            alt="Government of India Emblem"
-            class="gov-logo-emblem"
-            title="Government of India"
-          />
+            alt="Government of India Emblem" class="gov-logo-emblem" title="Government of India" />
           <div class="gov-logo-divider"></div>
           <div class="gov-logo-digital" title="Digital India">
             <span class="di-digital">Digital</span><span class="di-india">India</span><span class="di-wave">~</span>
@@ -70,23 +76,48 @@
         <div class="logo-icon">🛂</div>
         <div class="logo-text">Passport<span>Ease</span></div>
       </a>
+
       <nav class="nav-links" id="mainNav">
+        <a href="index.html" class="nav-link active" data-i18n="nav.home">🏠 Home</a>
       </nav>
+
       <div class="header-actions">
-        <div class="user-bar" id="userBar"></div>
-        <div class="login-dropdown" id="loginDropdownContainer">
-          <button class="btn btn-primary btn-sm login-drop-btn" style="padding:8px 18px;font-size:12px;display:flex;align-items:center;gap:6px;border:none;font-family:inherit;cursor:pointer">
-            🔐 <span data-i18n="nav.login">Login</span>
-            <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-          <div class="login-dropdown-menu">
-            <a href="html/login.html" class="login-dropdown-item"><span style="font-size:16px;">👤</span> Citizen</a>
-            <a href="html/admin-login.html" class="login-dropdown-item"><span style="font-size:16px;">🔧</span> Admin</a>
-            <a href="html/police-login.html" class="login-dropdown-item"><span style="font-size:16px;">🛡️</span> Police</a>
+        <div id="userBar" style="display:flex;align-items:center;gap:12px">
+          <!-- Login Dropdown -->
+          <div class="login-dropdown" id="loginDropdownContainer">
+            <button class="btn btn-secondary btn-sm"
+              style="padding:8px 16px; display:flex; align-items:center; gap:6px;">
+              <span data-i18n="nav.login">Login</span>
+              <span style="font-size:10px; opacity:0.6;">▼</span>
+            </button>
+            <div class="login-dropdown-menu">
+              <a href="html/login.html?role=user" class="login-dropdown-item">👤 Citizen Login</a>
+              <a href="html/login.html?role=admin" class="login-dropdown-item">🔧 Admin Portal</a>
+              <a href="html/login.html?role=police" class="login-dropdown-item">🛡️ Police Portal</a>
+            </div>
           </div>
         </div>
-        <button class="btn-icon" id="themeToggle" title="Toggle Dark Mode" aria-label="Toggle theme">🌙</button>
+
+        <button class="btn-icon" id="themeToggle" title="Toggle Dark Mode">🌓</button>
+
+        <!-- Language Switcher -->
+        <div class="lang-dropdown">
+          <button class="btn-icon" id="langBtn" style="width:auto; padding:0 12px; font-size:13px; gap:6px;">
+            🌐 <span id="currentLang">EN</span>
+          </button>
+          <div class="lang-dropdown-menu" id="langContent">
+            <button class="lang-item" data-lang="en">English</button>
+            <button class="lang-item" data-lang="hi">हिन्दी</button>
+            <button class="lang-item" data-lang="ta">தமிழ்</button>
+            <button class="lang-item" data-lang="te">తెలుగు</button>
+            <button class="lang-item" data-lang="bn">বাংলা</button>
+            <button class="lang-item" data-lang="gu">ગુજરાતી</button>
+            <button class="lang-item" data-lang="pa">ਪੰਜਾਬੀ</button>
+          </div>
+        </div>
       </div>
+
+      <button class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></button>
     </div>
   </header>
 
@@ -102,7 +133,7 @@
     <div class="hero-content">
       <div class="hero-badge" data-i18n="hero.badge">🇮🇳 Government of India — Passport Services</div>
       <h1 class="hero-heading">
-        <span data-i18n="hero.title1">Your Passport Journey,</span><br/>
+        <span data-i18n="hero.title1">Your Passport Journey,</span><br />
         <span class="hero-gradient-text" data-i18n="hero.title2">Simplified &amp; Digitized.</span>
       </h1>
       <p class="hero-description" data-i18n="hero.desc">
@@ -142,7 +173,8 @@
         <div class="hero-card-body">
           <div class="hero-card-id">PASS-2026-00001</div>
           <div class="hero-card-row"><span>Name</span><strong>Rahul Sharma</strong></div>
-          <div class="hero-card-row"><span>Status</span><span class="status-badge approved" style="font-size:11px;padding:3px 10px"><span class="status-dot"></span>Approved</span></div>
+          <div class="hero-card-row"><span>Status</span><span class="status-badge approved"
+              style="font-size:11px;padding:3px 10px"><span class="status-dot"></span>Approved</span></div>
           <div class="hero-card-row"><span>Appointment</span><strong>18 Apr 2026, 10:30 AM</strong></div>
           <div class="hero-card-progress">
             <div class="hero-card-progress-bar"></div>
@@ -189,7 +221,8 @@
   <section class="location-section" id="locationSection">
     <div class="location-inner">
       <div class="location-map">
-        <img src="assets/india_map.png" alt="Detailed India Political Map" class="india-map-image" style="border-radius:var(--radius-lg); box-shadow:var(--shadow-md);" />
+        <img src="assets/india_map.png" alt="Detailed India Political Map" class="india-map-image"
+          style="border-radius:var(--radius-lg); box-shadow:var(--shadow-md);" />
       </div>
       <div class="location-card fade-in">
         <h2 data-i18n="loc.title">500+ Passport Seva Locations</h2>
@@ -218,7 +251,10 @@
           <p>Fill out your details, upload documents, and submit your application online.</p>
         </div>
         <div class="step-connector">
-          <svg width="48" height="20" viewBox="0 0 48 20"><path d="M0 10 H40 L36 5 M40 10 L36 15" stroke="var(--accent)" fill="none" stroke-width="2" stroke-linecap="round"/></svg>
+          <svg width="48" height="20" viewBox="0 0 48 20">
+            <path d="M0 10 H40 L36 5 M40 10 L36 15" stroke="var(--accent)" fill="none" stroke-width="2"
+              stroke-linecap="round" />
+          </svg>
         </div>
         <div class="step-card">
           <div class="step-number">02</div>
@@ -227,7 +263,10 @@
           <p>Admin verifies each uploaded document individually. Failed docs can be re-uploaded by the applicant.</p>
         </div>
         <div class="step-connector">
-          <svg width="48" height="20" viewBox="0 0 48 20"><path d="M0 10 H40 L36 5 M40 10 L36 15" stroke="var(--accent)" fill="none" stroke-width="2" stroke-linecap="round"/></svg>
+          <svg width="48" height="20" viewBox="0 0 48 20">
+            <path d="M0 10 H40 L36 5 M40 10 L36 15" stroke="var(--accent)" fill="none" stroke-width="2"
+              stroke-linecap="round" />
+          </svg>
         </div>
         <div class="step-card">
           <div class="step-number">03</div>
@@ -236,7 +275,10 @@
           <p>Local police verifies the applicant's background using Aadhaar-based criminal database checks.</p>
         </div>
         <div class="step-connector">
-          <svg width="48" height="20" viewBox="0 0 48 20"><path d="M0 10 H40 L36 5 M40 10 L36 15" stroke="var(--accent)" fill="none" stroke-width="2" stroke-linecap="round"/></svg>
+          <svg width="48" height="20" viewBox="0 0 48 20">
+            <path d="M0 10 H40 L36 5 M40 10 L36 15" stroke="var(--accent)" fill="none" stroke-width="2"
+              stroke-linecap="round" />
+          </svg>
         </div>
         <div class="step-card">
           <div class="step-number">04</div>
@@ -245,7 +287,10 @@
           <p>After police clearance, admin gives final approval. This is the last gate before passport issuance.</p>
         </div>
         <div class="step-connector">
-          <svg width="48" height="20" viewBox="0 0 48 20"><path d="M0 10 H40 L36 5 M40 10 L36 15" stroke="var(--accent)" fill="none" stroke-width="2" stroke-linecap="round"/></svg>
+          <svg width="48" height="20" viewBox="0 0 48 20">
+            <path d="M0 10 H40 L36 5 M40 10 L36 15" stroke="var(--accent)" fill="none" stroke-width="2"
+              stroke-linecap="round" />
+          </svg>
         </div>
         <div class="step-card">
           <div class="step-number">05</div>
@@ -262,69 +307,138 @@
     <div class="section-container">
       <div class="section-header">
         <div class="section-badge" data-i18n="feat.badge">Features</div>
-        <h2 class="section-heading"><span data-i18n="feat.title">Everything You Need,</span> <span data-i18n="feat.title.span">Built In</span></h2>
-        <p class="section-desc" data-i18n="feat.subdesc">A comprehensive passport application system with 10 powerful features</p>
+        <h2 class="section-heading"><span data-i18n="feat.title">Everything You Need,</span> <span
+            data-i18n="feat.title.span">Built In</span></h2>
+        <p class="section-desc" data-i18n="feat.subdesc">A comprehensive passport application system with 10 powerful
+          features</p>
       </div>
       <div class="features-grid-new">
         <div class="feature-card-new feature-card-accent">
           <div class="feature-card-icon">💾</div>
           <h3 data-i18n="feat.f1.t">Auto-Save Draft</h3>
-          <p data-i18n="feat.f1.d">Your form data saves automatically as you type with a 500ms debounce. Come back anytime without losing progress.</p>
+          <p data-i18n="feat.f1.d">Your form data saves automatically as you type with a 500ms debounce. Come back
+            anytime without losing progress.</p>
           <div class="feature-card-tag" data-i18n="feat.tag1">Smart Save</div>
         </div>
         <div class="feature-card-new">
           <div class="feature-card-icon">📍</div>
           <h3 data-i18n="feat.f2.t">Status Tracker</h3>
-          <p data-i18n="feat.f2.d">Visual step-by-step progress indicator with color-coded badges for every application stage.</p>
+          <p data-i18n="feat.f2.d">Visual step-by-step progress indicator with color-coded badges for every application
+            stage.</p>
           <div class="feature-card-tag" data-i18n="feat.tag2">Real-Time</div>
         </div>
         <div class="feature-card-new">
           <div class="feature-card-icon">📷</div>
           <h3 data-i18n="feat.f3.t">Document Upload</h3>
-          <p data-i18n="feat.f3.d">Upload passport photo &amp; Aadhaar card with instant Base64 preview and file size validation (max 2MB).</p>
+          <p data-i18n="feat.f3.d">Upload passport photo &amp; Aadhaar card with instant Base64 preview and file size
+            validation (max 2MB).</p>
           <div class="feature-card-tag" data-i18n="feat.tag3">Drag &amp; Drop</div>
         </div>
         <div class="feature-card-new">
           <div class="feature-card-icon">📅</div>
           <h3 data-i18n="feat.f4.t">Slot Booking</h3>
-          <p data-i18n="feat.f4.d">16 daily time slots from 9 AM – 5 PM. Booked slots are auto-blocked to prevent double bookings.</p>
+          <p data-i18n="feat.f4.d">16 daily time slots from 9 AM – 5 PM. Booked slots are auto-blocked to prevent double
+            bookings.</p>
           <div class="feature-card-tag" data-i18n="feat.tag4">Anti-Collision</div>
         </div>
         <div class="feature-card-new">
           <div class="feature-card-icon">✅</div>
           <h3 data-i18n="feat.f5.t">Smart Validation</h3>
-          <p data-i18n="feat.f5.d">Real-time field validation with Aadhaar auto-formatting (XXXX XXXX XXXX), age check (18+), and Indian mobile format.</p>
+          <p data-i18n="feat.f5.d">Real-time field validation with Aadhaar auto-formatting (XXXX XXXX XXXX), age check
+            (18+), and Indian mobile format.</p>
           <div class="feature-card-tag" data-i18n="feat.tag5">Instant Feedback</div>
         </div>
         <div class="feature-card-new">
           <div class="feature-card-icon">🔧</div>
           <h3 data-i18n="feat.f6.t">Admin Panel</h3>
-          <p data-i18n="feat.f6.d">Dedicated admin dashboard to search, filter, approve, or reject all applications with one click.</p>
+          <p data-i18n="feat.f6.d">Dedicated admin dashboard to search, filter, approve, or reject all applications with
+            one click.</p>
           <div class="feature-card-tag" data-i18n="feat.tag6">Full Control</div>
         </div>
         <div class="feature-card-new">
           <div class="feature-card-icon">🤖</div>
           <h3 data-i18n="feat.chatbot.t">AI Support Chatbot</h3>
-          <p data-i18n="feat.chatbot.d">An intelligent digital assistant integrated directly to guide users seamlessly through their application journey.</p>
+          <p data-i18n="feat.chatbot.d">An intelligent digital assistant integrated directly to guide users seamlessly
+            through their application journey.</p>
           <div class="feature-card-tag">24/7 Support</div>
         </div>
         <div class="feature-card-new">
           <div class="feature-card-icon">🌍</div>
           <h3 data-i18n="feat.i18n.t">Multilingual Support</h3>
-          <p data-i18n="feat.i18n.d">Comprehensive site-wide translation system for regional languages ensuring complete accessibility for all citizens.</p>
+          <p data-i18n="feat.i18n.d">Comprehensive site-wide translation system for regional languages ensuring complete
+            accessibility for all citizens.</p>
           <div class="feature-card-tag">Inclusive</div>
         </div>
         <div class="feature-card-new">
           <div class="feature-card-icon">🧮</div>
           <h3 data-i18n="feat.fee.t">Fee Calculator</h3>
-          <p data-i18n="feat.fee.d">Dynamically computes customized passport processing fees based on application type, booklet size, and scheme.</p>
+          <p data-i18n="feat.fee.d">Dynamically computes customized passport processing fees based on application type,
+            booklet size, and scheme.</p>
           <div class="feature-card-tag">Smart Pricing</div>
         </div>
         <div class="feature-card-new">
           <div class="feature-card-icon">🔍</div>
           <h3 data-i18n="feat.granular.t">Granular Verification</h3>
-          <p data-i18n="feat.granular.d">Admin-level independent document rejection with specific applicant feedback and seamless individual re-upload workflows.</p>
+          <p data-i18n="feat.granular.d">Admin-level independent document rejection with specific applicant feedback and
+            seamless individual re-upload workflows.</p>
           <div class="feature-card-tag">Precision Workflow</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== NEWS & EVENTS ========== -->
+  <section class="news-section">
+    <div class="news-container">
+      <div class="section-header center">
+        <h2 class="section-title" data-i18n="news.title">Latest Updates & Events</h2>
+        <p class="section-subtitle" data-i18n="news.subtitle">Stay informed with the newest announcements from the
+          Passport Authority.</p>
+      </div>
+
+      <div class="news-cards">
+        <div class="news-card card-rotate-left">
+          <div class="news-tag" data-i18n="news.t1">Announcement</div>
+          <h3 class="news-card-title" data-i18n="news.h1">mPassport Seva App Update</h3>
+          <p class="news-card-text" data-i18n="news.d1">New security features added to the official mobile app for safer
+            document uploads.</p>
+          <div class="news-footer">
+            <span class="news-date">April 30, 2026</span>
+            <a href="#" class="news-link">Learn More →</a>
+          </div>
+        </div>
+
+        <div class="news-card card-rotate-right">
+          <div class="news-tag" data-i18n="news.t2">Service</div>
+          <h3 class="news-card-title" data-i18n="news.h2">Passport Seva Kendra Camp</h3>
+          <p class="news-card-text" data-i18n="news.d2">Special weekend camps organized in major cities to reduce the
+            current application backlog.</p>
+          <div class="news-footer">
+            <span class="news-date">April 29, 2026</span>
+            <a href="#" class="news-link">Learn More →</a>
+          </div>
+        </div>
+
+        <div class="news-card card-rotate-left">
+          <div class="news-tag" data-i18n="news.t3">Policy</div>
+          <h3 class="news-card-title" data-i18n="news.h3">E-Passport Rollout Phase 2</h3>
+          <p class="news-card-text" data-i18n="news.d3">Expansion of chip-based e-passports to all major regional
+            offices across the country.</p>
+          <div class="news-footer">
+            <span class="news-date">Mar 19, 2026</span>
+            <a href="#" class="news-link">Learn More →</a>
+          </div>
+        </div>
+
+        <div class="news-card card-rotate-right">
+          <div class="news-tag" data-i18n="news.t4">Alert</div>
+          <h3 class="news-card-title" data-i18n="news.h4">System Maintenance</h3>
+          <p class="news-card-text" data-i18n="news.d4">Scheduled portal maintenance this Sunday. Services will be
+            restored by Monday morning.</p>
+          <div class="news-footer">
+            <span class="news-date">April 25, 2026</span>
+            <a href="#" class="news-link">Learn More →</a>
+          </div>
         </div>
       </div>
     </div>
@@ -335,9 +449,12 @@
     <div class="benefiting-inner">
       <div class="benefiting-stars">★ ★ ★ ★ ★</div>
       <h2 class="benefiting-title">Benefiting citizens applying for Passport</h2>
-      <p class="benefiting-desc">Simplifying the process of getting a Passport. Making sure that each applicant is issued a Passport in a seamless and timely manner.</p>
+      <p class="benefiting-desc">Simplifying the process of getting a Passport. Making sure that each applicant is
+        issued a Passport in a seamless and timely manner.</p>
       <p class="benefiting-help">We are available 24/7 to help you with your Passport journey.</p>
-      <a href="#" class="benefiting-btn" onclick="document.getElementById('helpdeskOverlay').classList.add('active'); event.preventDefault(); return false;">Write to our Helpdesk</a>
+      <a href="#" class="benefiting-btn"
+        onclick="document.getElementById('helpdeskOverlay').classList.add('active'); event.preventDefault(); return false;">Write
+        to our Helpdesk</a>
     </div>
   </section>
 
@@ -350,7 +467,8 @@
             <div class="logo-icon">🛂</div>
             <div class="logo-text">Passport<span>Ease</span></div>
           </div>
-          <p class="footer-brand-desc" data-i18n="foot.desc">A modern, digital-first passport application system. Built for speed, simplicity, and accessibility.</p>
+          <p class="footer-brand-desc" data-i18n="foot.desc">A modern, digital-first passport application system. Built
+            for speed, simplicity, and accessibility.</p>
         </div>
         <div class="footer-links-group">
           <h4 data-i18n="foot.quick">Quick Links</h4>
@@ -381,7 +499,8 @@
           </div>
           <div class="footer-contact-item">
             <span class="footer-contact-icon">📧</span>
-            <a href="mailto:kaushik93503@gmail.com" style="color:inherit;word-break:break-all;">kaushik93503@gmail.com</a>
+            <a href="mailto:kaushik93503@gmail.com"
+              style="color:inherit;word-break:break-all;">kaushik93503@gmail.com</a>
           </div>
           <div class="footer-contact-item">
             <span class="footer-contact-icon">📞</span>
@@ -392,7 +511,8 @@
       <div class="footer-bottom">
         <p data-i18n="foot.copy">&copy; 2026 PassportEase. All rights reserved. For demonstration purposes only.</p>
         <div class="footer-scroll-top">
-          <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" class="scroll-top-btn" title="Back to top">↑</a>
+          <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" class="scroll-top-btn"
+            title="Back to top">↑</a>
         </div>
       </div>
     </div>
@@ -400,44 +520,46 @@
 
   <script src="js/shared.js"></script>
   <script>
-    (function(){
+    (function () {
       const s = JSON.parse(localStorage.getItem('pe_session') || 'null');
       const ub = document.getElementById('userBar');
       const loginDrop = document.getElementById('loginDropdownContainer');
       if (s) {
         if (loginDrop) loginDrop.style.display = 'none';
         if (s.role === 'user') {
-          const i = (s.name||'U').charAt(0).toUpperCase();
-          ub.innerHTML = `<div class="user-avatar">${i}</div><span>${s.name||'User'}</span><button class="btn btn-secondary btn-sm" onclick="localStorage.removeItem('pe_session');location.reload()" style="padding:6px 12px;font-size:11px">Logout</button>`;
+          const i = (s.name || 'U').charAt(0).toUpperCase();
+          ub.innerHTML = `<div class="user-avatar">${i}</div><span>${s.name || 'User'}</span><button class="btn btn-secondary btn-sm" onclick="localStorage.removeItem('pe_session');location.reload()" style="padding:6px 12px;font-size:11px">Logout</button>`;
         } else if (s.role === 'admin') {
           ub.innerHTML = `<a href="html/admin.html" class="btn btn-secondary btn-sm" style="margin-right:8px;padding:6px 12px;font-size:11px">🔧 Dashboard</a><div class="user-avatar" style="background:linear-gradient(135deg,#ef4444,#dc2626)">A</div><span>Admin</span><button class="btn btn-secondary btn-sm" onclick="localStorage.removeItem('pe_session');location.reload()" style="padding:6px 12px;font-size:11px">Logout</button>`;
         } else if (s.role === 'police') {
-          ub.innerHTML = `<a href="html/police.html" class="btn btn-secondary btn-sm" style="margin-right:8px;padding:6px 12px;font-size:11px">🛡️ Dashboard</a><div class="user-avatar" style="background:linear-gradient(135deg,#3b82f6,#1d4ed8)">🛡️</div><span>${s.name||'Police'}</span><button class="btn btn-secondary btn-sm" onclick="localStorage.removeItem('pe_session');location.reload()" style="padding:6px 12px;font-size:11px">Logout</button>`;
+          ub.innerHTML = `<a href="html/police.html" class="btn btn-secondary btn-sm" style="margin-right:8px;padding:6px 12px;font-size:11px">🛡️ Dashboard</a><div class="user-avatar" style="background:linear-gradient(135deg,#3b82f6,#1d4ed8)">🛡️</div><span>${s.name || 'Police'}</span><button class="btn btn-secondary btn-sm" onclick="localStorage.removeItem('pe_session');location.reload()" style="padding:6px 12px;font-size:11px">Logout</button>`;
         }
       }
     })();
 
-    if (typeof window.onDBReady === 'function') { window.onDBReady(() => {
-      const counters = document.querySelectorAll('.counter-value');
-      const speed = 40;
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const el = entry.target;
-            const target = +el.dataset.target;
-            const increment = Math.ceil(target / (2000 / speed));
-            let current = 0;
-            const timer = setInterval(() => {
-              current += increment;
-              if (current >= target) { el.textContent = target.toLocaleString(); clearInterval(timer); }
-              else el.textContent = current.toLocaleString();
-            }, speed);
-            observer.unobserve(el);
-          }
-        });
-      }, { threshold: 0.5 });
-      counters.forEach(c => observer.observe(c));
-    }); }
+    if (typeof window.onDBReady === 'function') {
+      window.onDBReady(() => {
+        const counters = document.querySelectorAll('.counter-value');
+        const speed = 40;
+        const observer = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const el = entry.target;
+              const target = +el.dataset.target;
+              const increment = Math.ceil(target / (2000 / speed));
+              let current = 0;
+              const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) { el.textContent = target.toLocaleString(); clearInterval(timer); }
+                else el.textContent = current.toLocaleString();
+              }, speed);
+              observer.unobserve(el);
+            }
+          });
+        }, { threshold: 0.5 });
+        counters.forEach(c => observer.observe(c));
+      });
+    }
   </script>
 
   <!-- Helpdesk Modal -->
@@ -445,12 +567,17 @@
     <div class="helpdesk-modal">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
         <h2 style="font-size:20px; font-weight:700;">Helpdesk Support</h2>
-        <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('helpdeskOverlay').classList.remove('active');" style="padding:6px 12px; font-size:12px;">✕ Close</button>
+        <button type="button" class="btn btn-secondary btn-sm"
+          onclick="document.getElementById('helpdeskOverlay').classList.remove('active');"
+          style="padding:6px 12px; font-size:12px;">✕ Close</button>
       </div>
       <form id="helpdeskForm" onsubmit="window.handleHelpdeskSubmit && window.handleHelpdeskSubmit(event)">
         <div class="form-group" style="margin-bottom:16px;">
-          <label style="display:block; margin-bottom:6px; font-weight:600; font-size:13px; color:var(--text-secondary);">Inquiry Type</label>
-          <select class="form-control" id="hdType" required style="width:100%; padding:10px; border-radius:var(--radius-sm); border:1px solid var(--border-color); background:var(--bg-input); color:var(--text-primary); font-family:inherit;">
+          <label
+            style="display:block; margin-bottom:6px; font-weight:600; font-size:13px; color:var(--text-secondary);">Inquiry
+            Type</label>
+          <select class="form-control" id="hdType" required
+            style="width:100%; padding:10px; border-radius:var(--radius-sm); border:1px solid var(--border-color); background:var(--bg-input); color:var(--text-primary); font-family:inherit;">
             <option value="" disabled selected>Select Feedback or Complaint</option>
             <option value="Feedback">Feedback</option>
             <option value="Complaint">Complaint</option>
@@ -458,20 +585,29 @@
           </select>
         </div>
         <div class="form-group" style="margin-bottom:16px;">
-          <label style="display:block; margin-bottom:6px; font-weight:600; font-size:13px; color:var(--text-secondary);">Your Name</label>
-          <input type="text" class="form-control" id="hdName" placeholder="Enter full name" required style="width:100%; padding:10px; border-radius:var(--radius-sm); border:1px solid var(--border-color); background:var(--bg-input); color:var(--text-primary); font-family:inherit;">
+          <label
+            style="display:block; margin-bottom:6px; font-weight:600; font-size:13px; color:var(--text-secondary);">Your
+            Name</label>
+          <input type="text" class="form-control" id="hdName" placeholder="Enter full name" required
+            style="width:100%; padding:10px; border-radius:var(--radius-sm); border:1px solid var(--border-color); background:var(--bg-input); color:var(--text-primary); font-family:inherit;">
         </div>
         <div class="form-group" style="margin-bottom:20px;">
-          <label style="display:block; margin-bottom:6px; font-weight:600; font-size:13px; color:var(--text-secondary);">Message / Details</label>
-          <textarea class="form-control" id="hdMessage" rows="5" placeholder="Describe your feedback or complaint..." required style="width:100%; padding:10px; border-radius:var(--radius-sm); border:1px solid var(--border-color); background:var(--bg-input); color:var(--text-primary); font-family:inherit; resize:vertical;"></textarea>
+          <label
+            style="display:block; margin-bottom:6px; font-weight:600; font-size:13px; color:var(--text-secondary);">Message
+            / Details</label>
+          <textarea class="form-control" id="hdMessage" rows="5" placeholder="Describe your feedback or complaint..."
+            required
+            style="width:100%; padding:10px; border-radius:var(--radius-sm); border:1px solid var(--border-color); background:var(--bg-input); color:var(--text-primary); font-family:inherit; resize:vertical;"></textarea>
         </div>
-        <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center; padding:12px; font-size:14px; margin-top:8px;">Submit to Tech Team</button>
+        <button type="submit" class="btn btn-primary"
+          style="width:100%; justify-content:center; padding:12px; font-size:14px; margin-top:8px;">Submit to Tech
+          Team</button>
       </form>
     </div>
   </div>
 
   <script>
-    window.handleHelpdeskSubmit = function(e) {
+    window.handleHelpdeskSubmit = function (e) {
       e.preventDefault();
       const form = document.getElementById('helpdeskForm');
       const overlay = document.getElementById('helpdeskOverlay');
@@ -483,7 +619,7 @@
       complaints.push(complaint);
       if (window.lsSet) window.lsSet('pe_complaints', complaints);
       if (window.PE && window.PE.saveComplaint) PE.saveComplaint(complaint); // persist to Supabase
-      if(typeof showToast === 'function') {
+      if (typeof showToast === 'function') {
         showToast('Your ' + type.toLowerCase() + ' has been sent to our Tech Team. Thank you!', 'success');
       } else {
         alert('Your ' + type.toLowerCase() + ' has been sent to our Tech Team. Thank you!');
@@ -492,58 +628,75 @@
       overlay.classList.remove('active');
     };
 
-    if (typeof window.onDBReady === 'function') { window.onDBReady(() => {
-      const overlay = document.getElementById('helpdeskOverlay');
-      if (overlay) {
-        overlay.addEventListener('click', (e) => { if(e.target === overlay) overlay.classList.remove('active'); });
-      }
-      const openFeeBtn = document.getElementById('btnOpenFeeCalc');
-      const closeFeeBtn = document.getElementById('btnCloseFeeCalc');
-      const feeOverlay = document.getElementById('feeCalcOverlay');
-      const feeForm = document.getElementById('feeCalcForm');
-      const feeResult = document.getElementById('feeResult');
-      if(openFeeBtn && closeFeeBtn && feeOverlay && feeForm) {
-        openFeeBtn.addEventListener('click', () => feeOverlay.classList.add('active'));
-        closeFeeBtn.addEventListener('click', (e) => { e.preventDefault(); feeOverlay.classList.remove('active'); feeResult.classList.add('hidden'); });
-        feeOverlay.addEventListener('click', (e) => { if(e.target === feeOverlay) { feeOverlay.classList.remove('active'); feeResult.classList.add('hidden'); } });
-        feeForm.addEventListener('submit', (e) => { e.preventDefault(); calculateFee(); });
-        function calculateFee() {
-          const type = document.getElementById('fcType').value;
-          const pages = document.getElementById('fcPages').value;
-          const scheme = document.getElementById('fcScheme').value;
-          if(!type || !pages || !scheme) return;
-          let baseFee = 0;
-          if (type === 'Fresh' || type === 'Renewal') {
-            if (pages === '36') baseFee = 1500;
-            if (pages === '60') baseFee = 2000;
-          }
-          if (scheme === 'Tatkaal') baseFee += 2000;
-          feeResult.innerHTML = `
+    if (typeof window.onDBReady === 'function') {
+      window.onDBReady(() => {
+        const overlay = document.getElementById('helpdeskOverlay');
+        if (overlay) {
+          overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.classList.remove('active'); });
+        }
+        const openFeeBtn = document.getElementById('btnOpenFeeCalc');
+        const closeFeeBtn = document.getElementById('btnCloseFeeCalc');
+        const feeOverlay = document.getElementById('feeCalcOverlay');
+        const feeForm = document.getElementById('feeCalcForm');
+        const feeResult = document.getElementById('feeResult');
+        if (openFeeBtn && closeFeeBtn && feeOverlay && feeForm) {
+          openFeeBtn.addEventListener('click', () => feeOverlay.classList.add('active'));
+          closeFeeBtn.addEventListener('click', (e) => { e.preventDefault(); feeOverlay.classList.remove('active'); feeResult.classList.add('hidden'); });
+          feeOverlay.addEventListener('click', (e) => { if (e.target === feeOverlay) { feeOverlay.classList.remove('active'); feeResult.classList.add('hidden'); } });
+          feeForm.addEventListener('submit', (e) => { e.preventDefault(); calculateFee(); });
+          function calculateFee() {
+            const type = document.getElementById('fcType').value;
+            const pages = document.getElementById('fcPages').value;
+            const scheme = document.getElementById('fcScheme').value;
+            if (!type || !pages || !scheme) return;
+            let baseFee = 0;
+            if (type === 'Fresh' || type === 'Renewal') {
+              if (pages === '36') baseFee = 1500;
+              if (pages === '60') baseFee = 2000;
+            }
+            if (scheme === 'Tatkaal') baseFee += 2000;
+            feeResult.innerHTML = `
             <div style="font-size:13px; color:var(--text-secondary); margin-bottom:4px;">Estimated Passport Fee:</div>
             <div style="font-size:32px; font-weight:800; color:var(--success);">₹${baseFee.toLocaleString('en-IN')}</div>
             <div style="font-size:11px; color:var(--text-muted); margin-top:6px;">*Fee is subject to change as per MEA guidelines.</div>
           `;
-          feeResult.classList.remove('hidden');
+            feeResult.classList.remove('hidden');
+          }
         }
-      }
-      const pinSubmit = document.getElementById('pinSearchBtn');
-      const pinInput = document.getElementById('pinCodeInput');
-      const pinResult = document.getElementById('pinResultDisplay');
-      if(pinSubmit && pinInput && pinResult) {
-        const searchPin = () => {
-          const val = pinInput.value.trim();
-          if(!val || val.length !== 6 || isNaN(val)) { pinResult.innerHTML = '<span style="color:var(--error);">Please enter a valid 6-digit PIN code.</span>'; return; }
-          pinResult.innerHTML = '<span class="typing-dots"><span></span><span></span><span></span></span> Searching...';
-          setTimeout(() => {
-            const mockCities = ['Delhi', 'Mumbai', 'Bangalore', 'Chennai', 'Kolkata', 'Hyderabad', 'Pune'];
-            const city = mockCities[val.charAt(0) % mockCities.length];
-            pinResult.innerHTML = `Nearest Passport Seva Kendra found at:<br/><strong>Regional Passport Office, ${city}</strong><br/><span style="font-size:12px;opacity:0.8;display:block;margin-top:4px;">Appointments are available starting next week.</span>`;
-          }, 800);
-        };
-        pinSubmit.addEventListener('click', searchPin);
-        pinInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') { e.preventDefault(); searchPin(); } });
-      }
-    }); }
+        const pinSubmit = document.getElementById('pinSearchBtn');
+        const pinInput = document.getElementById('pinCodeInput');
+        const pinResult = document.getElementById('pinResultDisplay');
+        if (pinSubmit && pinInput && pinResult) {
+          const searchPin = () => {
+            const val = pinInput.value.trim();
+            if (!val || val.length !== 6 || isNaN(val)) { pinResult.innerHTML = '<span style="color:var(--error);">Please enter a valid 6-digit PIN code.</span>'; return; }
+            pinResult.innerHTML = '<span class="typing-dots"><span></span><span></span><span></span></span> Searching...';
+            setTimeout(() => {
+              const mockCities = ['Delhi', 'Mumbai', 'Bangalore', 'Chennai', 'Kolkata', 'Hyderabad', 'Pune'];
+              const city = mockCities[val.charAt(0) % mockCities.length];
+              pinResult.innerHTML = `Nearest Passport Seva Kendra found at:<br/><strong>Regional Passport Office, ${city}</strong><br/><span style="font-size:12px;opacity:0.8;display:block;margin-top:4px;">Appointments are available starting next week.</span>`;
+            }, 800);
+          };
+          pinSubmit.addEventListener('click', searchPin);
+          pinInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') { e.preventDefault(); searchPin(); } });
+        }
+
+        // News Card Animations
+        const newsCards = document.querySelectorAll('.news-card');
+        const newsObserver = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const card = entry.target;
+              const rot = card.classList.contains('card-rotate-left') ? '-1.5deg' : '1.5deg';
+              card.style.setProperty('--rot', rot);
+              card.classList.add('animate');
+              newsObserver.unobserve(card);
+            }
+          });
+        }, { threshold: 0.1 });
+        newsCards.forEach(card => newsObserver.observe(card));
+      });
+    }
   </script>
 
   <!-- Fee Calculator Floating Widget -->
@@ -557,35 +710,49 @@
     <div class="fee-calc-modal">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
         <h2 style="font-size:20px; font-weight:700;">🧮 Fee Calculator</h2>
-        <button class="btn btn-secondary btn-sm" id="btnCloseFeeCalc" style="padding:6px 12px; font-size:12px;">✕ Close</button>
+        <button class="btn btn-secondary btn-sm" id="btnCloseFeeCalc" style="padding:6px 12px; font-size:12px;">✕
+          Close</button>
       </div>
       <form id="feeCalcForm">
         <div class="form-group" style="margin-bottom:16px;">
-          <label style="display:block; margin-bottom:6px; font-weight:600; font-size:13px; color:var(--text-secondary);">Application Type</label>
-          <select class="form-control" id="fcType" required style="width:100%; padding:10px; border-radius:var(--radius-sm); border:1px solid var(--border-color); background:var(--bg-input); color:var(--text-primary); font-family:inherit;">
+          <label
+            style="display:block; margin-bottom:6px; font-weight:600; font-size:13px; color:var(--text-secondary);">Application
+            Type</label>
+          <select class="form-control" id="fcType" required
+            style="width:100%; padding:10px; border-radius:var(--radius-sm); border:1px solid var(--border-color); background:var(--bg-input); color:var(--text-primary); font-family:inherit;">
             <option value="" disabled selected>Select Type</option>
             <option value="Fresh">Fresh Passport</option>
             <option value="Renewal">Renewal / Re-issue</option>
           </select>
         </div>
         <div class="form-group" style="margin-bottom:16px;">
-          <label style="display:block; margin-bottom:6px; font-weight:600; font-size:13px; color:var(--text-secondary);">Booklet Size</label>
-          <select class="form-control" id="fcPages" required style="width:100%; padding:10px; border-radius:var(--radius-sm); border:1px solid var(--border-color); background:var(--bg-input); color:var(--text-primary); font-family:inherit;">
+          <label
+            style="display:block; margin-bottom:6px; font-weight:600; font-size:13px; color:var(--text-secondary);">Booklet
+            Size</label>
+          <select class="form-control" id="fcPages" required
+            style="width:100%; padding:10px; border-radius:var(--radius-sm); border:1px solid var(--border-color); background:var(--bg-input); color:var(--text-primary); font-family:inherit;">
             <option value="" disabled selected>Select Pages</option>
             <option value="36">36 Pages (Standard)</option>
             <option value="60">60 Pages (Jumbo)</option>
           </select>
         </div>
         <div class="form-group" style="margin-bottom:20px;">
-          <label style="display:block; margin-bottom:6px; font-weight:600; font-size:13px; color:var(--text-secondary);">Application Scheme</label>
-          <select class="form-control" id="fcScheme" required style="width:100%; padding:10px; border-radius:var(--radius-sm); border:1px solid var(--border-color); background:var(--bg-input); color:var(--text-primary); font-family:inherit;">
+          <label
+            style="display:block; margin-bottom:6px; font-weight:600; font-size:13px; color:var(--text-secondary);">Application
+            Scheme</label>
+          <select class="form-control" id="fcScheme" required
+            style="width:100%; padding:10px; border-radius:var(--radius-sm); border:1px solid var(--border-color); background:var(--bg-input); color:var(--text-primary); font-family:inherit;">
             <option value="" disabled selected>Select Scheme</option>
             <option value="Normal">Normal</option>
             <option value="Tatkaal">Tatkaal (Expedited)</option>
           </select>
         </div>
-        <button type="button" onclick="document.getElementById('feeCalcForm').dispatchEvent(new Event('submit'))" class="btn btn-primary" style="width:100%; justify-content:center; padding:12px; font-size:14px;">Calculate Total Fee</button>
-        <div id="feeResult" class="hidden" style="background:rgba(34,197,94,.1); border:1px solid rgba(34,197,94,.3); border-radius:var(--radius-sm); padding:16px; margin-top:16px; text-align:center;"></div>
+        <button type="button" onclick="document.getElementById('feeCalcForm').dispatchEvent(new Event('submit'))"
+          class="btn btn-primary" style="width:100%; justify-content:center; padding:12px; font-size:14px;">Calculate
+          Total Fee</button>
+        <div id="feeResult" class="hidden"
+          style="background:rgba(34,197,94,.1); border:1px solid rgba(34,197,94,.3); border-radius:var(--radius-sm); padding:16px; margin-top:16px; text-align:center;">
+        </div>
       </form>
     </div>
   </div>
@@ -593,4 +760,5 @@
   <script src="js/i18n.js"></script>
   <script src="js/chatbot.js"></script>
 </body>
+
 </html>

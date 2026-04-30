@@ -132,7 +132,23 @@
 
     // ============ APPLY PAGE ============
     'apply.title':    { en:'📝 Passport Application Form', hi:'📝 पासपोर्ट आवेदन फॉर्म', ta:'📝 பாஸ்போர்ட் விண்ணப்ப படிவம்', te:'📝 పాస్‌పోర్ట్ దరఖాస్తు ఫారం', bn:'📝 পাসপোর্ট আবেদন ফর্ম', gu:'📝 પાસપોર્ટ અરજી ફોર્મ', pa:'📝 ਪਾਸਪੋਰਟ ਅਰਜ਼ੀ ਫਾਰਮ', mr:'📝 पासपोर्ट अर्ज फॉर्म', kn:'📝 ಪಾಸ್‌ಪೋರ್ಟ್ ಅರ್ಜಿ ಫಾರ್ಮ್', ml:'📝 പാസ്‌പോർട്ട് അപേക്ഷ ഫോം', ur:'📝 پاسپورٹ درخواست فارم' },
-    'apply.subtitle': { en:'Complete all steps to submit your application. Your progress is auto-saved.', hi:'अपना आवेदन सबमिट करने के लिए सभी चरण पूरे करें। आपकी प्रगति ऑटो-सेव होती है।', ta:'உங்கள் விண்ணப்பத்தை சமர்ப்பிக்க அனைத்து படிகளையும் நிறைவு செய்யுங்கள்.', te:'అన్ని దశలు పూర్తి చేయండి. మీ పురోగతి ఆటో-సేవ్.', bn:'আবেদন জমা দিতে সব ধাপ সম্পন্ন করুন। অটো-সেভ হয়।', gu:'અરજી સબમિટ કરવા બધા સ્ટેપ પૂરા કરો. ઓટો-સેવ.', pa:'ਅਰਜ਼ੀ ਜਮ੍ਹਾ ਕਰਨ ਲਈ ਸਾਰੇ ਕਦਮ ਪੂਰੇ ਕਰੋ। ਆਟੋ-ਸੇਵ।', mr:'अर्ज सबमिट करण्यासाठी सर्व चरणे पूर्ण करा. ऑटो-सेव.', kn:'ಅರ್ಜಿ ಸಲ್ಲಿಸಲು ಎಲ್ಲ ಹಂತ ಪೂರ್ಣ. ಆಟೋ-ಸೇವ್.', ml:'അപേക്ഷ സമർപ്പിക്കാൻ എല്ലാ ഘട്ടങ്ങളും പൂർത്തിയാക്കുക.', ur:'درخواست جمع کرانے کے لیے تمام مراحل مکمل کریں۔' },
+    'apply.subtitle': { en:'Complete all steps to submit your application. Your progress is auto-saved.', hi:'अपना आवेदन सबमिट करने के लिए सभी चरण पूरे करें। आपकी प्रगति ऑटो-सेव होती है।', ta:'உங்கள் விண்ணப்பத்தை சமர்ப்பிக்க அனைத்து படிகளையும் நிறைவு செய்யுங்கள்.', te:'అన్ని దశలు పూర్తి చేయండి. మీ పురోగతి ఆటో-సేవ్.', bn:'আবেদন জমা দিতে সব ধাপ সম্পন্ন করুন। অটো-সেভ হয়।', gu:'અરજી સબમિટ કરવા બધા સ્ટેપ પૂરા કરો. ઓટો-સેવ.', pa:'ਅਰਜ਼ੀ ਜਮ੍ਹਾ ਕਰਨ ਲਈ ਸਾਰੇ ਕਦਮ ਪੂਰੇ ਕਰੋ। ਆਟੋ-ਸੇਵ।', mr:'अर्ज सबमिट करण्यासाठी सर्व चरणे पूर्ण करा. ऑटो-सेव.', kn:'ಅರ್ಜಿ ಸಲ್ಲಿಸಲು ಎಲ್ಲ ಹಂತ ಪೂರ್ಣ. ಆಟो-ಸೇವ್.', ml:'അപേക്ഷ സമർപ്പിക്കാൻ എല്ലാ ഘട്ടങ്ങളും പൂർത്തിയാക്കുക.', ur:'درخواست جمع کرانے کے لیے تمام مراحل مکمل کریں۔' },
+
+    // ============ NEWS SECTION ============
+    'news.title':    { en:'Latest Updates & Events', hi:'नवीनतम अपडेट और कार्यक्रम', ta:'சமீபத்திய புதுப்பிப்புகள்', te:'తాజా అప్‌డేట్‌లు', bn:'সর্বশেষ আপডেট', gu:'નવીનતમ અપડેટ્સ', pa:'ਤਾਜ਼ਾ ਅਪਡੇਟਸ', mr:'नवीनतम अपडेट', kn:'ಇತ್ತೀಚಿನ ಅಪ್ಡೇಟ್', ml:'ഏറ്റവും പുതിയ അപ്ഡേറ്റുകൾ', ur:'تازہ ترین اپ ڈیٹس' },
+    'news.subtitle': { en:'Stay informed with the newest announcements from the Passport Authority.', hi:'पासपोर्ट प्राधिकरण की नवीनतम घोषणाओं से अवगत रहें।', ta:'பாஸ்போர்ட் ஆணையத்தின் அறிவிப்புகளைத் தெரிந்து கொள்ளுங்கள்.', te:'పాస్‌పోర్ట్ అథారిటీ నుండి తాజా ప్రకటనల గురించి తెలుసుకోండి.', bn:'পাসপোর্ট কর্তৃপক্ষের সর্বশেষ ঘোষণা সম্পর্কে অবহিত থাকুন।', gu:'પાસપોર્ટ ઓથોરિટીની નવીનતમ જાહેરાતોથી માહિતગાર રહો.', pa:'ਪਾਸਪੋਰਟ ਅਥਾਰਟੀ ਦੀਆਂ ਤਾਜ਼ਾ ਘੋਸ਼ਣਾਵਾਂ ਤੋਂ ਜਾਣੂ ਰਹੋ।', mr:'पासपोर्ट प्राधिकरणाच्या नवीनतम घोषणांबद्दल माहिती मिळवा.', kn:'ಪಾಸ್‌ಪೋರ್ಟ್ ಪ್ರಾಧಿಕಾರದ ಇತ್ತೀಚಿನ ಘೋಷಣೆಗಳ ಬಗ್ಗೆ ತಿಳಿದುಕೊಳ್ಳಿ.', ml:'പാസ്‌പോർട്ട് അതോറിറ്റിയിൽ നിന്നുള്ള ഏറ്റവും പുതിയ അറിയിപ്പുകളെക്കുറിച്ച് അറിയുക.', ur:'پاسپورٹ اتھارٹی کے تازہ ترین اعلانات سے باخبر رہیں۔' },
+    'news.t1': { en:'Announcement', hi:'घोषणा', ta:'அறிவிப்பு' },
+    'news.h1': { en:'mPassport Seva App Update', hi:'mPassport Seva ऐप अपडेट', ta:'mPassport Seva ஆப் புதுப்பிப்பு' },
+    'news.d1': { en:'New security features added to the official mobile app for safer document uploads.', hi:'सुरक्षित दस्तावेज़ अपलोड के लिए आधिकारिक मोबाइल ऐप में नई सुरक्षा विशेषताएं जोड़ी गई हैं।', ta:'பாதுகாப்பான ஆவணப் பதிவேற்றத்திற்காக அதிகாரப்பூர்வ மொபைல் பயன்பாட்டில் புதிய பாதுகாப்பு அம்சங்கள் சேர்க்கப்பட்டுள்ளன.' },
+    'news.t2': { en:'Service', hi:'सेवा', ta:'சேவை' },
+    'news.h2': { en:'Passport Seva Kendra Camp', hi:'पासपोर्ट सेवा केंद्र कैंप', ta:'பாஸ்போர்ட் சேவா கேந்திரா முகாம்' },
+    'news.d2': { en:'Special weekend camps organized in major cities to reduce the current application backlog.', hi:'वर्तमान आवेदन बैकलॉग को कम करने के लिए प्रमुख शहरों में विशेष सप्ताहांत शिविर आयोजित किए गए।', ta:'தற்போதைய விண்ணப்ப தேக்கத்தை குறைக்க முக்கிய நகரங்களில் சிறப்பு வார இறுதி முகамகள் ஏற்பாடு செய்யப்பட்டுள்ளன.' },
+    'news.t3': { en:'Policy', hi:'नीति', ta:'கொள்கை' },
+    'news.h3': { en:'E-Passport Rollout Phase 2', hi:'ई-पासपोर्ट रोलआउट चरण 2', ta:'மின்-பாஸ்போர்ட் வெளியீடு கட்டம் 2' },
+    'news.d3': { en:'Expansion of chip-based e-passports to all major regional offices across the country.', hi:'देश भर के सभी प्रमुख क्षेत्रीय कार्यालयों में चिप-आधारित ई-पासपोर्ट का विस्तार।', ta:'நாடு முழுவதும் உள்ள அனைத்து முக்கிய பிராந்திய அலுவலகங்களுக்கும் சிப் அடிப்படையிலான மின்-பாஸ்போர்ட்களின் விரிவாக்கம்.' },
+    'news.t4': { en:'Alert', hi:'अलर्ट', ta:'எச்சரிக்கை' },
+    'news.h4': { en:'System Maintenance', hi:'सिस्टम रखरखाव', ta:'கணினி பராமриப்பு' },
+    'news.d4': { en:'Scheduled portal maintenance this Sunday. Services will be restored by Monday morning.', hi:'इस रविवार को निर्धारित पोर्टल रखरखाव। सोमवार सुबह तक सेवाएं बहाल कर दी जाएंगी।', ta:'இந்த ஞாயிற்றுக்கிழமை திட்டமிடப்பட்ட போர்டல் பராமரிப்பு. திங்கட்கிழமை காலை சேவைகள் மீண்டும் தொடங்கப்படும்.' },
   };
 
   function t(key, lang) {
@@ -147,7 +163,7 @@
       const val = t(key, lang);
       if (val) el.textContent = val;
     });
-    // Handle special innerHTML for hero title with <br/> and <span>
+    // Handle special innerHTML for elements with HTML tags
     document.querySelectorAll('[data-i18n-html]').forEach(el => {
       const key = el.dataset.i18nHtml;
       const val = t(key, lang);
@@ -155,25 +171,26 @@
     });
     document.documentElement.setAttribute('data-lang', lang);
     localStorage.setItem('pe_language', lang);
-    const sel = document.getElementById('langSelect');
-    if (sel) sel.value = lang;
+    
+    // Update current lang text in custom dropdown
+    const currentLangEl = document.getElementById('currentLang');
+    if (currentLangEl) currentLangEl.textContent = lang.toUpperCase();
   }
 
-  function createLangSelector() {
-    if (document.getElementById('langSelectorWrap')) return;
-    const wrap = document.createElement('div');
-    wrap.id = 'langSelectorWrap';
-    wrap.className = 'lang-selector-wrap';
-    wrap.innerHTML = `<select class="lang-select" id="langSelect" title="Change Language">${Object.entries(LANGS).map(([k,v]) => `<option value="${k}">${v}</option>`).join('')}</select>`;
-    const ha = document.querySelector('.header-actions');
-    if (ha) ha.insertBefore(wrap, ha.firstChild);
-    const sel = document.getElementById('langSelect');
+  function initLangSelector() {
     const savedLang = localStorage.getItem('pe_language') || 'en';
-    sel.value = savedLang;
-    sel.addEventListener('change', () => applyLang(sel.value));
+    
+    // Add listeners to custom lang buttons
+    document.querySelectorAll('.lang-item').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const lang = btn.dataset.lang;
+        applyLang(lang);
+      });
+    });
+
     if (savedLang !== 'en') applyLang(savedLang);
   }
 
   window.PE_I18N = { t, applyLang, LANGS };
-window.onDBReady ? window.onDBReady(createLangSelector) : document.addEventListener('DOMContentLoaded', createLangSelector);
+  document.addEventListener('DOMContentLoaded', initLangSelector);
 })();

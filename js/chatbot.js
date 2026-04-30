@@ -26,8 +26,8 @@
   const KB = {
     greet: {
       keywords: ['hello','hi','hey','help','hii','namaste','namaskar','hola','good morning','good evening','start','shuru','madad','sahayata','kaise','नमस्ते','हेलो','हाय','मदद','सहायता','शुरू'],
-      en: "👋 Hello! I'm the PassportEase AI Assistant. How can I help you today?\n\nYou can ask me about:\n• How to apply for a passport\n• Required documents\n• Renewal process\n• Track application status\n• Appointment booking\n• Police verification\n• Fees & processing time",
-      hi: "👋 नमस्ते! मैं PassportEase AI सहायक हूँ। आज मैं आपकी कैसे मदद कर सकता हूँ?\n\nआप मुझसे पूछ सकते हैं:\n• पासपोर्ट के लिए कैसे आवेदन करें\n• आवश्यक दस्तावेज़\n• नवीनीकरण प्रक्रिया\n• आवेदन की स्थिति ट्रैक करें\n• अपॉइंटमेंट बुकिंग\n• पुलिस सत्यापन\n• शुल्क और प्रसंस्करण समय",
+      en: "👋 Hello! I'm the PassportEase AI Assistant. How can I help you today?\n\nYou can ask me about:\n• How to apply for a passport\n• Required documents\n• Renewal process\n• Track application status\n• Police verification\n• Fees & processing time",
+      hi: "👋 नमस्ते! मैं PassportEase AI सहायक हूँ। आज मैं आपकी कैसे मदद कर सकता हूँ?\n\nआप मुझसे पूछ सकते हैं:\n• पासपोर्ट के लिए कैसे आवेदन करें\n• आवश्यक दस्तावेज़\n• नवीनीकरण प्रक्रिया\n• आवेदन की स्थिति ट्रैक करें\n• पुलिस सत्यापन\n• शुल्क और प्रसंस्करण समय",
       ta: "👋 வணக்கம்! நான் PassportEase AI உதவியாளர். இன்று நான் உங்களுக்கு எப்படி உதவ முடியும்?\n\n• பாஸ்போர்ட் விண்ணப்பம்\n• தேவையான ஆவணங்கள்\n• புதுப்பித்தல்\n• நிலை கண்காணிப்பு",
       te: "👋 నమస్కారం! నేను PassportEase AI సహాయకుడిని. నేను మీకు ఎలా సహాయం చేయగలను?\n\n• పాస్‌పోర్ట్ దరఖాస్తు\n• అవసరమైన పత్రాలు\n• పునరుద్ధరణ\n• స్థితి ట్రాకింగ్",
       bn: "👋 নমস্কার! আমি PassportEase AI সহকারী। আজ আমি আপনাকে কীভাবে সাহায্য করতে পারি?\n\n• পাসপোর্ট আবেদন\n• প্রয়োজনীয় নথি\n• নবায়ন\n• স্থিতি ট্র্যাকিং",
@@ -36,9 +36,9 @@
     },
     apply: {
       keywords: ['apply','application','new passport','fresh','how to apply','kaise apply','form','avedan','aavedan','kare','karu','apply kaise','apply karna','आवेदन','अप्लाई','कैसे','फॉर्म','नया पासपोर्ट','अप्लाई करें','कैसे अप्लाई करें'],
-      en: "📝 **How to Apply for a Passport:**\n\n**Step 1:** Click 'Apply' in the navigation bar\n**Step 2:** Fill the 7-step form:\n  1️⃣ Application Type (Fresh/Renewal)\n  2️⃣ Personal Details (Name, DOB, Gender)\n  3️⃣ Family Information (Parents' names)\n  4️⃣ Contact & Address + Select nearest PSK city\n  5️⃣ Upload Documents (Photo, Aadhaar, etc.)\n  6️⃣ Book Appointment slot\n  7️⃣ Review & Submit\n\n✅ Your form auto-saves as you type!\n\n👉 Would you like to know about required documents?",
-      hi: "📝 **पासपोर्ट के लिए कैसे आवेदन करें:**\n\n**चरण 1:** नेविगेशन बार में 'Apply' पर क्लिक करें\n**चरण 2:** 7-चरण फॉर्म भरें:\n  1️⃣ आवेदन प्रकार (नया/नवीनीकरण)\n  2️⃣ व्यक्तिगत विवरण (नाम, जन्मतिथि)\n  3️⃣ पारिवारिक जानकारी\n  4️⃣ संपर्क और पता + नजदीकी PSK शहर चुनें\n  5️⃣ दस्तावेज़ अपलोड करें\n  6️⃣ अपॉइंटमेंट बुक करें\n  7️⃣ समीक्षा करें और सबमिट करें\n\n✅ आपका फॉर्म टाइप करते समय ऑटो-सेव होता है!\n\n👉 क्या आप आवश्यक दस्तावेज़ों के बारे में जानना चाहेंगे?",
-      ta: "📝 **பாஸ்போர்ட் விண்ணப்பிக்க:**\n\n1️⃣ விண்ணப்ப வகை\n2️⃣ தனிப்பட்ட விவரங்கள்\n3️⃣ குடும்ப தகவல்\n4️⃣ தொடர்பு & முகவரி\n5️⃣ ஆவணங்கள் பதிவேற்றம்\n6️⃣ சந்திப்பு முன்பதிவு\n7️⃣ மதிப்பாய்வு & சமர்ப்பிப்பு",
+      en: "📝 **How to Apply for a Passport:**\n\n**Step 1:** Click 'Apply' in the navigation bar\n**Step 2:** Fill the 6-step form:\n  1️⃣ Application Type (Fresh/Renewal)\n  2️⃣ Personal Details (Name, DOB, Gender)\n  3️⃣ Family Information (Parents' names)\n  4️⃣ Contact & Address + Select nearest PSK city\n  5️⃣ Upload Documents (Photo, Aadhaar, etc.)\n  6️⃣ Review & Submit\n\n✅ Your form auto-saves as you type!\n\n👉 Would you like to know about required documents?",
+      hi: "📝 **पासपोर्ट के लिए कैसे आवेदन करें:**\n\n**चरण 1:** नेविगेशन बार में 'Apply' पर क्लिक करें\n**चरण 2:** 6-चरण फॉर्म भरें:\n  1️⃣ आवेदन प्रकार (नया/नवीनीकरण)\n  2️⃣ व्यक्तिगत विवरण (नाम, जन्मतिथि)\n  3️⃣ पारिवारिक जानकारी\n  4️⃣ संपर्क और पता + नजदीकी PSK शहर चुनें\n  5️⃣ दस्तावेज़ अपलोड करें\n  6️⃣ समीक्षा करें और सबमिट करें\n\n✅ आपका फॉर्म टाइप करते समय ऑटो-सेव होता है!\n\n👉 क्या आप आवश्यक दस्तावेज़ों के बारे में जानना चाहेंगे?",
+      ta: "📝 **பாஸ்போர்ட் விண்ணப்பிக்க:**\n\n1️⃣ விண்ணப்ப வகை\n2️⃣ தனிப்பட்ட விவரங்கள்\n3️⃣ குடும்ப தகவல்\n4️⃣ தொடர்பு & முகவரி\n5️⃣ ஆவணங்கள் பதிவேற்றம்\n6️⃣ மதிப்பாய்வு & சமர்ப்பிப்பு",
     },
     documents: {
       keywords: ['document','documents','dastavez','dastaveez','kagaz','papers','upload','photo','aadhaar','aadhar','proof','required documents','kya chahiye','kaun se','dstaavez','दस्तावेज़','कागज़ात','क्या चाहिए','कौन से','अपलोड','फोटो','आधार'],
@@ -47,8 +47,8 @@
     },
     renewal: {
       keywords: ['renew','renewal','renew passport','extend','purana','expire','validity','punarnirman','tatkal','renewal kaise','renew kaise','purana passport','नवीनीकरण','रिन्यू','पुराना','वैधता','कैसे रिन्यू करें','एक्सपायर'],
-      en: "🔄 **Passport Renewal Process:**\n\n1. Select **'Renewal'** as Application Type in Step 1\n2. Fill your existing details (same 7-step form)\n3. Upload current & new documents\n4. Book appointment and submit\n\n📋 **Additional things for renewal:**\n• Your old passport (original)\n• Self-attested copy of first & last page of old passport\n• If name changed: marriage certificate / gazette notification\n\n⏱️ Normal processing: 30-45 days\n⚡ Tatkal: 7-14 days (extra fee applies)",
-      hi: "🔄 **पासपोर्ट नवीनीकरण प्रक्रिया:**\n\n1. चरण 1 में **'Renewal'** चुनें\n2. अपना विवरण भरें (7-चरण फॉर्म)\n3. वर्तमान और नए दस्तावेज़ अपलोड करें\n4. अपॉइंटमेंट बुक करें और सबमिट करें\n\n📋 **नवीनीकरण के लिए अतिरिक्त:**\n• पुराना पासपोर्ट (मूल)\n• पहले और अंतिम पृष्ठ की स्व-प्रमाणित प्रति\n\n⏱️ सामान्य: 30-45 दिन\n⚡ तत्काल: 7-14 दिन (अतिरिक्त शुल्क)",
+      en: "🔄 **Passport Renewal Process:**\n\n1. Select **'Renewal'** as Application Type in Step 1\n2. Fill your existing details (same 6-step form)\n3. Upload current & new documents\n4. Submit your application\n\n📋 **Additional things for renewal:**\n• Your old passport (original)\n• Self-attested copy of first & last page of old passport\n• If name changed: marriage certificate / gazette notification\n\n⏱️ Normal processing: 30-45 days\n⚡ Tatkal: 7-14 days (extra fee applies)",
+      hi: "🔄 **पासपोर्ट नवीनीकरण प्रक्रिया:**\n\n1. चरण 1 में **'Renewal'** चुनें\n2. अपना विवरण भरें (6-चरण फॉर्म)\n3. वर्तमान और नए दस्तावेज़ अपलोड करें\n4. आवेदन सबमिट करें\n\n📋 **नवीनीकरण के लिए अतिरिक्त:**\n• पुराना पासपोर्ट (मूल)\n• पहले और अंतिम पृष्ठ की स्व-प्रमाणित प्रति\n\n⏱️ सामान्य: 30-45 दिन\n⚡ तत्काल: 7-14 दिन (अतिरिक्त शुल्क)",
     },
     track: {
       keywords: ['track','status','check status','where is','kahan','kab','kitna time','kab milega','track kaise','mera passport','status check','tracking','ट्रैक','स्थिति','कहाँ','कब','कितना समय','कब मिलेगा','मेरा पासपोर्ट'],
@@ -56,9 +56,9 @@
       hi: "📍 **अपने आवेदन को ट्रैक करें:**\n\n1. नेविगेशन बार में **'Track'** पर क्लिक करें\n2. आपको सभी सबमिट किए गए आवेदन दिखेंगे\n3. प्रत्येक में **5-चरण प्रगति ट्रैकर:**\n  📄 सबमिट → ✅ एडमिन स्वीकृत → 📋 दस्तावेज़ सत्यापित → 🛡️ पुलिस सत्यापित → 🛂 पासपोर्ट जारी\n\n🔴 यदि अस्वीकृत, आपको कारण दिखेगा",
     },
     appointment: {
-      keywords: ['appointment','slot','booking','book','time','date','kab jaana','kab jana','appointment kaise','slot book','समय','अपॉइंटमेंट','बुकिंग','स्लॉट','कब जाना','तारीख'],
-      en: "📅 **Appointment Booking:**\n\n• Available in **Step 6** of the application form\n• Choose a date (tomorrow onwards)\n• Select from **16 time slots** (9 AM – 5 PM, every 30 min)\n• Already booked slots appear greyed out\n• Your slot is reserved immediately upon selection\n\n💡 Tip: Choose a weekday morning for shorter queues!",
-      hi: "📅 **अपॉइंटमेंट बुकिंग:**\n\n• आवेदन फॉर्म के **चरण 6** में उपलब्ध\n• एक तारीख चुनें (कल से आगे)\n• **16 समय स्लॉट** में से चुनें (सुबह 9 – शाम 5)\n• पहले से बुक किए गए स्लॉट ग्रे हो जाते हैं\n\n💡 सुझाव: कम भीड़ के लिए कार्यदिवस की सुबह चुनें!",
+      keywords: ['appointment','slot','booking','book','time','date','kab jaana','kab jana','appointment kaise','slot book','समय','अपॉइंटमेंट','बुकिंग','स्लॉट','कब जाना','तاريख'],
+      en: "📅 **Appointment Not Required:**\n\nAs of April 2026, physically visiting the Passport Seva Kendra for an appointment is **no longer required**. The entire process, including document verification and identity check, is now conducted **100% online**.\n\nSimply submit your application and track the progress!",
+      hi: "📅 **अपॉइंटमेंट की आवश्यकता नहीं है:**\n\nअप्रैल 2026 से, पासपोर्ट सेवा केंद्र पर भौतिक रूप से जाने की **आवश्यकता नहीं है**। दस्तावेज़ सत्यापन और पहचान जांच सहित पूरी प्रक्रिया अब **100% ऑनलाइन** आयोजित की जाती है।\n\nबस अपना आवेदन जमा करें और प्रगति को ट्रैक करें!",
     },
     police: {
       keywords: ['police','verification','police verification','criminal','check','pv','police check','background','पुलिस','सत्यापन','पुलिस सत्यापन','जाँच','बैकग्राउंड','क्रिमिनल'],
@@ -89,8 +89,8 @@
 
   // Default/fallback response
   const FALLBACK = {
-    en: "🤔 I'm not sure I understand. Could you try rephrasing?\n\nHere are things I can help with:\n• How to apply for a passport\n• Required documents\n• Renewal process\n• Track application\n• Appointment booking\n• Police verification\n• Fees & processing time\n• Document re-upload (if failed)",
-    hi: "🤔 मुझे समझ नहीं आया। क्या आप दूसरे शब्दों में पूछ सकते हैं?\n\nमैं इनमें मदद कर सकता हूँ:\n• पासपोर्ट आवेदन कैसे करें\n• आवश्यक दस्तावेज़\n• नवीनीकरण\n• आवेदन ट्रैक करें\n• अपॉइंटमेंट बुकिंग\n• पुलिस सत्यापन\n• शुल्क और समय\n• दस्तावेज़ दोबारा अपलोड (फेल होने पर)",
+    en: "🤔 I'm not sure I understand. Could you try rephrasing?\n\nHere are things I can help with:\n• How to apply for a passport\n• Required documents\n• Renewal process\n• Track application\n• Police verification\n• Fees & processing time\n• Document re-upload (if failed)",
+    hi: "🤔 मुझे समझ नहीं आया। क्या आप दूसरे शब्दों में पूछ सकते हैं?\n\nमैं इनमें मदद कर सकता हूँ:\n• पासपोर्ट आवेदन कैसे करें\n• आवश्यक दस्तावेज़\n• नवीनीकरण\n• आवेदन ट्रैक करें\n• पुलिस सत्यापन\n• शुल्क और समय\n• दस्तावेज़ दोबारा अपलोड (फेल होने पर)",
     ta: "🤔 புரியவில்லை. மீண்டும் கேளுங்கள்.\n\n• பாஸ்போர்ட் விண்ணப்பம்\n• தேவையான ஆவணங்கள்\n• புதுப்பித்தல்",
     te: "🤔 అర్థం కాలేదు. దయచేసి మళ్ళీ అడగండి.",
     bn: "🤔 বুঝতে পারলাম না। অনুগ্রহ করে আবার জিজ্ঞাসা করুন।",
